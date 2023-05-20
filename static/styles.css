@@ -1,0 +1,90 @@
+:root
+{
+    box-sizing: border-box;
+}
+*,
+::before,
+::after
+{
+    box-sizing: inherit;
+}
+body
+{
+    background-color: #1fb266;
+    font-family: helvetica, Arial, sans-serif;
+}
+
+body * + *
+{
+    margin-top: 1.5em;
+}
+
+.container
+{
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.site-nav 
+{
+    display: flex;
+    padding: .5em;
+    list-style-type: none;
+    background-color: #5f4b44;
+    border-radius: .2em;
+}
+
+.site-nav > li
+{
+    margin-top: 0;
+}
+
+.site-nav > li > a 
+{
+    display: block;
+    padding: 0.5em 1em;
+    background-color: #cc6b5a;
+    color: white;
+    text-decoration: none;
+}
+
+.site-nav > li + li 
+{
+    margin-left: 1.5em;
+}
+
+.site-nav > .nav-right
+{
+    margin-left: auto;
+}
+
+/* add background color and padding to the tiles*/
+.tile > *
+{
+    padding: 0.5em;
+    background-color: #fff;
+}
+/*styling the main element*/
+.grid
+{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 0.5em;
+}
+
+/* styling the main */
+.column-sidebar1
+{
+    grid-column-start: 1/2;
+}
+
+.column-main
+{
+    grid-column: 2/3;
+}
+
+.column-sidebar2
+{
+    grid-column: 3/4;
+}
