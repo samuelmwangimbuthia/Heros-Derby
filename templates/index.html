@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block title %} 
+    Home
+{% endblock %}
+
+{% block main %}
+    <aside class="column-asidebar1">
+        <h3>Previous Games Results</h3>
+        <table>
+            <thead>games played for the last 3 days</thead>
+            <tr>
+                <th>Team A</th>
+                <th>Team B</th>
+                <th>Results</th>
+            </tr>
+            <tr>
+                <td>Karuturi FC</td>
+                <td>Mathare FC</td>
+                <td>0:0</td>
+            </tr>
+            <tr>
+                <td>AFC Leopards</td>
+                <td>Gor Mahia FC</td>
+                <td>2:1</td>
+            </tr>
+        </table>
+        <div>
+            <h4>Transfer News</h4>
+            <p>Ouma moves to Mathare United</p>
+        </div>
+        <div>
+            <h3>Events</h3>
+            <p>Mater Hospital Charity Walk</p>
+        </div>
+    </aside>
+    <main class="column-main">
+        <div>
+            <h2>Results</h2>
+            <table>
+                <thead>Table Standings</thead>
+                <tr>
+                    <th>Club</th>
+                    <th>MP</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>PTS</th>
+                </tr>
+                <tr>
+                    <td>Mathare</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <td>Karuturi</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>AFC Leopard</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>Gor Mahia</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>40</td>
+                </tr>
+            </table>
+            <h2>Fixtures</h2>
+            <table>
+                <thead>Fixtures</thead>
+                <tr>
+                    <th>Team A</th>
+                    <th>Team B</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>Mathare</td>
+                    <td>AFC Leopard</td>
+                    <td>Saturday</td>
+                    <td>4.00 pm</td>
+                </tr>
+                <tr>
+                    <td>Gor Mahia</td>
+                    <td>Karuturi</td>
+                    <td>Saturday</td>
+                    <td>2.00 pm</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <aside class="column-asidebar2">
+        <div>
+            <p>Search</p>
+        </div>
+        <div>
+            <p>Know your player</p>
+        </div>
+        <div>
+            <p>Summary Biography</p>
+        </div>
+        <div>
+            <p>Sponsor a Team</p>
+            <ul>
+                <li>Uniform</li>
+                <li>Finances</li>
+                <li>Others</li>
+            </ul>
+        </div>
+    </aside>
+    
+{% endblock %}

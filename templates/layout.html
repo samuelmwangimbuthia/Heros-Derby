@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Heros Derby</h1>
+        </header>
+
+        <nav>
+            <ul class="site-nav">
+                <li><a href="/templates/index.html">Home</a></li>
+                <li><a href="/templates/teams.html">Teams</a></li>
+                <li><a href="/templates/women">Women</a></li>
+                <li class="nav-right"><a href="/templates/register">Register</a></li>
+                <li><a href="/templates/login">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="tile grid">
+            {% block main %}{% endblock %}
+        </div>
+
+        <footer>
+            <h3>A peace building initiative</h3>
+        </footer>
+    </div>
+</body>
+</html>
