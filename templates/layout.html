@@ -15,15 +15,15 @@
 
         <nav>
             <ul class="site-nav">
-                <li><a href="/templates/index.html">Home</a></li>
-                <li><a href="/templates/teams.html">Teams</a></li>
-                <li><a href="/templates/women">Women</a></li>
-                <li class="nav-right"><a href="/templates/register">Register</a></li>
-                <li><a href="/templates/login">Login</a></li>
+                <li><a href="/index">Home</a></li>
+                <li><a href="/teams">Teams</a></li>
+                <li><a href="/women">Women</a></li>
+                <li class="nav-right"><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
             </ul>
         </nav>
 
-        <div class="tile grid">
+        <div>
             {% block main %}{% endblock %}
         </div>
 
@@ -31,5 +31,6 @@
             <h3>A peace building initiative</h3>
         </footer>
     </div>
+    <script src="/static/scripts.js" type="text/javascript"></script>
 </body>
 </html>
