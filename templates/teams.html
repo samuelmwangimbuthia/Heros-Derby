@@ -5,5 +5,27 @@
 {% endblock %}
 
 {% block main %}
-    
+<div class="table-container">
+    <h1>Teams</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Logo</th>
+                <th>County</th>
+                <th>Constituency</th>
+                <th>Ward</th>
+            </tr>
+            {% for team in teams %}
+            <tr>
+                <td>{{ team[0] }}</td>
+                <td>{{ team[1] }}</td>
+                <td>{{ team[2] }}</td>
+                <td>{{ team[3] }}</td>
+                <td>{{ team[4] }}</td>
+                <td>{{ team[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+</div>
 {% endblock %}

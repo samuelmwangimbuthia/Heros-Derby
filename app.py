@@ -2,20 +2,25 @@ import os
 import sqlite3
 
 from flask import Flask, render_template, redirect, request, session
-#from flask_session import Session 
+from flask_session import Session 
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
 # Configure session to use filesystem (instead of signed cookies)
-#app.config["SESSION_PERMANENT"] = False
-#app.config["SESSION_TYPE"] = "filesystem"
-#Session(app)
+SECRET_KEY = "changeme"
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = sqlite3.connect("derby.db", check_same_thread=False)
-
-print("opened database successfully")
+#conn = sqlite3.connect("derby.db", check_same_thread=False)
+with sqlite3.connect("derby.db", check_same_thread=False) as con:
+    db = con.cursor()
+    if db:
+        print("opened database successfully")
+    else:
+        print("Error opening the database")
 
 @app.route("/index")
 def index():
@@ -40,23 +45,41 @@ def login():
             return ("must provide password")
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", [request.form.get("username")])
+        res= db.execute("SELECT * FROM users WHERE username = ?", [request.form.get("username")])
+        rows = res.fetchone()
 
         # Ensure username exists and password is correct
-        # if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-        #   return ("invalid username and/or password")
-
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
-
-        # set session username
-        session["user_username"] = rows[0]["username"]
-        # Redirect user to home page
-        return redirect("/")
-
+        #if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if not request.form.get("password"):
+           return ("invalid username and/or password")
+        
+        else:
+            # Remember which user has logged in
+            session["user_id"] = rows[0]
+            # set session username
+            session["user_username"] = rows[1]
+            # Redirect user to home page
+            check_persist = session.get("user_username")
+            print(check_persist)
+            return render_template("index.html", rows = check_persist)    
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("login.html")
+
+@app.route("/")
+def index2():
+  # check if the users exist or not
+    if not session.get("name"):
+        # if not there in the session then redirect to the login page
+        print('no session data')
+        return redirect("/login")
+    return render_template('index.html')
+
+@app.route("/logout")
+def logout():
+    session["name"] = None
+    return redirect("/")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -80,9 +103,19 @@ def register():
         elif not hash or hash != confirmation:
             return ("provided password did not match")
         else:
-            db.execute("INSERT INTO users (first_name, middle_name, last_name, username, hash) VALUES(?,?,?,?,?)", 
+            db.execute("INSERT INTO 'users' (first_name, middle_name, last_name, username, hash) VALUES(?,?,?,?,?)", 
                        [first_name, middle_name, last_name, username, hash])
+            con.commit()
             return render_template("register.html", registeredUsers = registeredUsers)
     return render_template("register.html")
+
+@app.route("/teams")
+def teams():
+    # fetch data from the teams table
+    db.execute("SELECT * FROM teams")
+    teams = db.fetchall()
+    return render_template("teams.html", teams=teams)
+
+
 if __name__ == "__main__":
     app.run()
