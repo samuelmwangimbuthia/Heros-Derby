@@ -6,25 +6,30 @@
 {% block main %}
 <div class="tile grid">
     <aside class="column-asidebar1">
-        <h3>Previous Games Results</h3>
+        <h3>Recent matches</h3>
         <table>
-            <thead>games played for the last 3 days</thead>
             <tr>
-                <th>Team A</th>
-                <th>Team B</th>
-                <th>Results</th>
+                <th>ID</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Home Score</th>
+                <th>Away Score</th>
+                <th>Date</th>
             </tr>
+            {% for match in recent_matches %}
             <tr>
-                <td>Karuturi FC</td>
-                <td>Mathare FC</td>
-                <td>0:0</td>
+                <td>{{ match[0] }}</td>
+                <td>{{ match[1] }}</td>
+                <td>{{ match[2] }}</td>
+                <td>{{ match[3] }}</td>
+                <td>{{ match[4] }}</td>
+                <td>{{ match[5] }}</td>
             </tr>
-            <tr>
-                <td>AFC Leopards</td>
-                <td>Gor Mahia FC</td>
-                <td>2:1</td>
-            </tr>
+            {% endfor %}
         </table>
+        <!--only  visible to registered users-->
+        <button><a href="/addMatch">Add Match</a></button>
+        {{recent_matches}}
         <div>
             <h4>Transfer News</h4>
             <p>Ouma moves to Mathare United</p>
