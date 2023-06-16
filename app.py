@@ -26,7 +26,7 @@ with sqlite3.connect("derby.db", check_same_thread=False) as con:
 def display_recent_matches():
     # Calculate the date three days ago
     today = datetime.date.today()
-    three_days_ago = today - datetime.timedelta(days=5)
+    three_days_ago = today - datetime.timedelta(days=100)
     # Execute a SELECT query to fetch recent matches
     #db.execute("SELECT * FROM matches WHERE match_date >= ?", (three_days_ago,))
     db.execute("SELECT matches.id, teams.name AS home_team, teams_away.name AS away_team, matches.home_score,matches.away_score,matches.match_date FROM matches LEFT OUTER JOIN teams ON matches.home_team_id = teams.id LEFT OUTER JOIN teams AS teams_away ON matches.away_team_id = teams_away.id WHERE match_date >= ?", (three_days_ago,))
@@ -161,6 +161,12 @@ def teams():
     db.execute("SELECT * FROM teams")
     teams = db.fetchall()
     return render_template("teams.html", teams=teams)
+
+# add a recently played match
+@app.route("/addMatch")
+def add_match():
+    # if not logged in , login first to add a match
+    return render_template("addMatch.html")
 
 if __name__ == "__main__":
     app.run()

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Match
+{% endblock %}
+
+{% block main %}
+<div class="login-box">
+    <h2>Tell people the games that were played in your area</h2>
+    <form action="/addMatch" method="post">
+        <div class="user-box">
+            <input type="text" name="home_team" placeholder="Home Team">
+            <label>Home Team</label>
+            
+        </div>
+        <div class="user-box">
+            <input type="text" name="away_team" placeholder="Away Team">
+            <label>Away Team</label>
+
+        </div>
+        <div class="user-box">
+            <input type="number" name="home_score" placeholder=" Home Score">
+            <label>Home Score</label>
+
+        </div>
+        <div class="user-box">
+            <input type="number" name="away_score">
+            <label>Away Score</label>
+        </div>
+        <div class="user-box">
+            <input type="date" name="Date">
+            <label>Date</label>
+
+        </div>
+        <div class="user-box">
+            <input type="text" name="venue">
+            <label>Venue</label>
+
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
