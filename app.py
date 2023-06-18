@@ -69,6 +69,7 @@ def rank_teams():
 #display upcoming matches
 #show a pop up to ask if the user knows the results if it was never filled
 # change past due games status from upcoming to postponed
+# check if the game already in the recent matches
 @app.route("/index")
 def index():
     recent_matches = display_recent_matches()
