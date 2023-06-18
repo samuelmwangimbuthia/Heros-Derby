@@ -66,7 +66,9 @@ def rank_teams():
         else:
             points = 0
     
-
+#display upcoming matches
+#show a pop up to ask if the user knows the results if it was never filled
+# change past due games status from upcoming to postponed
 @app.route("/index")
 def index():
     recent_matches = display_recent_matches()
@@ -163,9 +165,27 @@ def teams():
     return render_template("teams.html", teams=teams)
 
 # add a recently played match
-@app.route("/addMatch")
+@app.route("/addMatch", methods=["GET", "POST"])
 def add_match():
     # if not logged in , login first to add a match
+    if request.method == "POST":
+        # insert matches played into the database
+        # lookup the id for the teams and if not created insert it
+
+        homeTeam = request.form.get("home_team") 
+        awayTeam = request.form.get("away_team")
+        db.execute("SELECT id FROM teams WHERE name = ?", (homeTeam,))
+        home = db.fetchone()
+        db.execute("SELECT id FROM teams WHERE name = ?", (awayTeam,))
+        away = db.fetchone()
+        matchDate = request.form.get("match_date") 
+        matchTime = request.form.get("match_time")
+        homeScore = request.form.get("home_score")
+        awayScore = request.form.get("away_score")
+        print('%s',home)
+        db.execute("INSERT INTO 'matches' (home_team_id, away_team_id, match_date, match_time, home_score, away_score) VALUES(?,?,?,?,?,?)",
+                   [home, away, matchDate, matchTime, homeScore, awayScore])
+        con.commit()
     return render_template("addMatch.html")
 
 if __name__ == "__main__":
