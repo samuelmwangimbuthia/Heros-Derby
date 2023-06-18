@@ -183,9 +183,8 @@ def add_match():
         matchTime = request.form.get("match_time")
         homeScore = request.form.get("home_score")
         awayScore = request.form.get("away_score")
-        print('%s',home)
         db.execute("INSERT INTO 'matches' (home_team_id, away_team_id, match_date, match_time, home_score, away_score) VALUES(?,?,?,?,?,?)",
-                   [home, away, matchDate, matchTime, homeScore, awayScore])
+                   [home[0], away[0], matchDate, matchTime, homeScore, awayScore])
         con.commit()
     return render_template("addMatch.html")
 
