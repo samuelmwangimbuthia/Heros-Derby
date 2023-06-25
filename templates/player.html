@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}
+    Player
+{% endblock %}
+
+{% block main %}
+    <div>
+        <img src="/static/{{player[1]}}.jpg" alt="">
+        <h4>Name: {{player[1]}}</h4>
+        <p><a href="">Club: {{player[2]}}</a></p>
+        <p>Position: {{player[5]}}</p>
+        <p>Age: {{player[3]}}</p>
+        <p>Nationality: {{player[4]}}</p>
+        <p>{{player[8]}}</p>
+        
+    </div>
+{% endblock %}
