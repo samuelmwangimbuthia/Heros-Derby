@@ -158,21 +158,38 @@
     </main>
     <aside class="column-asidebar2">
         <div>
-            <p>Search</p>
+            <h4>Search A Player</h4>
+            <div class="search-container">
+                <form action="/search" method="post">
+                  <input type="text" placeholder="Search.." name="search">
+                  <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
         <div>
-            <p>Know your player</p>
+            <h4>Featured player</h4>
+            <div>
+                <img src="/static/{{player[1]}}.jpg" alt="">
+                <h4>Name: {{player[1]}}</h4>
+                <p><a href="">Club: {{player[2]}}</a></p>
+                <p>Position: {{player[5]}}</p>
+                <p>Age: {{player[3]}}</p>
+                <p>Nationality: {{player[4]}}</p>              
+            </div>
         </div>
         <div>
-            <p>Summary Biography</p>
-        </div>
-        <div>
-            <p>Sponsor a Team</p>
-            <ul>
-                <li>Uniform</li>
-                <li>Finances</li>
-                <li>Others</li>
-            </ul>
+            <h4>Sponsor A Team</h4>
+            <form action="/sponsor" method="post">
+                <label for="sponsor">Sponsorship</label>
+                <select name="sponsorship" id="sponsor">
+                    <option disabled selected> Select Sponsorship</option>
+                    <option value="Finances">Finances</option>
+                    <option value="uniform">Uniform</option>
+                    <option value="ball">Ball</option>
+                    <option value="others">Others</option>
+                </select>
+                <input type="submit" value="Submit" />
+            </form>           
         </div>
     </aside>
 </div>  

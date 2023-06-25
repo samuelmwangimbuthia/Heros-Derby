@@ -198,7 +198,24 @@ body .table-container {
     padding: 20px; 
 }
 
+/*styling the search button */
+.search-container {
+    float: right;
+}
+.search-container button {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
 
-
-
+/* style the select option*/
+select {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 

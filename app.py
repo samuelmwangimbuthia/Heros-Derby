@@ -113,6 +113,11 @@ def fixtures():
         """)
     upcoming = rows.fetchall()
     return upcoming
+# display featured player of the day
+def featuredPlayer():
+    rows = db.execute("SELECT * FROM players WHERE id = 1")
+    player = rows.fetchone()
+    return player
 
 @app.route("/index")
 def index():
@@ -120,7 +125,8 @@ def index():
     fixes = fixtures()
     ranks = rank_teams()
     results = show_results()
-    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results)
+    player = featuredPlayer()
+    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results, player = player)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -235,6 +241,18 @@ def add_match():
                    [home, away, matchDate, matchTime, homeScore, awayScore])
         con.commit()
     return render_template("addMatch.html")
+
+# search for players and coaches biography
+@app.route("/search", methods=["GET","POST"])
+def search():
+    if request.method == "POST":
+        requestedPlayer = request.form.get("search")
+        if requestedPlayer:
+            playerInfo = db.execute("SELECT * FROM players WHERE name = ?", [requestedPlayer])
+            player = playerInfo.fetchone()
+        else:
+            return "No player name supplied"
+    return render_template("player.html", player = player)
 
 if __name__ == "__main__":
     app.run(debug="True")
