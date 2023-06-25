@@ -4,9 +4,11 @@ import datetime
 from flask import Flask, render_template, redirect, request, session
 from flask_session import Session 
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__)
-
+Bootstrap(app)
 # Configure session to use filesystem (instead of signed cookies)
 SECRET_KEY = "changeme"
 app.config["SESSION_PERMANENT"] = False
@@ -29,7 +31,17 @@ def display_recent_matches():
     three_days_ago = today - datetime.timedelta(days=100)
     # Execute a SELECT query to fetch recent matches
     #db.execute("SELECT * FROM matches WHERE match_date >= ?", (three_days_ago,))
-    db.execute("SELECT matches.id, teams.name AS home_team, teams_away.name AS away_team, matches.home_score,matches.away_score,matches.match_date FROM matches LEFT OUTER JOIN teams ON matches.home_team_id = teams.id LEFT OUTER JOIN teams AS teams_away ON matches.away_team_id = teams_away.id WHERE match_date >= ?", (three_days_ago,))
+    db.execute("""
+        SELECT matches.id, 
+        teams.name AS home_team, 
+        teams_away.name AS away_team, 
+        matches.home_score,
+        matches.away_score,
+        matches.match_date 
+        FROM matches 
+        LEFT OUTER JOIN teams ON matches.home_team_id = teams.id 
+        LEFT OUTER JOIN teams AS teams_away ON matches.away_team_id = teams_away.id 
+        WHERE match_date >= ? LIMIT 3 """, (three_days_ago,))
 
     # Fetch all rows of data
     recent_matches = db.fetchall()
@@ -44,36 +56,71 @@ def rank_teams():
 
     # store team and its rank in a list as a dictionary
     ranking = []
-    results = []
     # iterate through the matches table to get the various ranking parameters
+    # 1. Get matches played by each team
     for team in teams_id:
-        db.execute("SELECT COUNT(*) AS total_matches FROM matches WHERE home_team_id = ? OR away_team_id = ?", team, team)
+        db.execute("SELECT COUNT(*) AS total_matches FROM matches WHERE home_team_id = ? OR away_team_id = ?", (team[0], team[0]))
         matches_played = db.fetchone()
-        ranking.append( matches_played)
+        ranking.append(matches_played)
     
-    # check the result for each team
-    for team in teams_id:
-        db.execute("SELECT COUNT(*) FROM matches WHERE home_team_id = ? AND home_score > away_score OR away_score > home_score", team)
-        win = db.fetchone()
-        db.execute("SELECT COUNT(*) FROM matches WHERE home_team_id = ? AND home_score = away_score", team )
-        draw = db.fetchone()
-        # compute point gunnered in each match
-        points = 0
-        if win:
-            points += 3
-        elif draw:
-            points += 1
-        else:
-            points = 0
-    
+
+    return ranking
+
+def show_results():
+    db.execute("""
+         SELECT
+            teams.name AS team_name,
+            SUM(CASE WHEN matches.home_score > matches.away_score THEN 3
+                     WHEN matches.home_score = matches.away_score THEN 1
+                     ELSE 0 END) AS total_points,
+            SUM(CASE WHEN matches.home_score > matches.away_score THEN 1
+                     ELSE 0 END) AS total_wins,
+            SUM(CASE WHEN matches.home_score = matches.away_score THEN 1
+                     ELSE 0 END) AS total_draws,
+            SUM(CASE WHEN matches.home_score < matches.away_score THEN 1
+                     ELSE 0 END) AS total_losses
+        FROM
+            teams
+        LEFT JOIN
+            matches ON teams.id = matches.home_team_id OR teams.id = matches.away_team_id
+        GROUP BY
+            teams.name
+        ORDER BY
+            total_points DESC;
+
+
+    """)
+
+    results = db.fetchall()
+
+    return results
+
 #display upcoming matches
 #show a pop up to ask if the user knows the results if it was never filled
 # change past due games status from upcoming to postponed
 # check if the game already in the recent matches
+def fixtures():
+    rows = db.execute("""
+        SELECT 
+        teams.name AS home_team, 
+        teams_away.name AS away_team, 
+        fixtures.match_date, 
+        fixtures.match_time, 
+        fixtures.venue 
+        FROM fixtures 
+        LEFT OUTER JOIN teams ON fixtures.home_team_id = teams.id 
+        LEFT OUTER JOIN teams AS teams_away ON fixtures.away_team_id = teams_away.id
+        """)
+    upcoming = rows.fetchall()
+    return upcoming
+
 @app.route("/index")
 def index():
     recent_matches = display_recent_matches()
-    return render_template("index.html", recent_matches=recent_matches)
+    fixes = fixtures()
+    ranks = rank_teams()
+    results = show_results()
+    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -190,4 +237,4 @@ def add_match():
     return render_template("addMatch.html")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug="True")
