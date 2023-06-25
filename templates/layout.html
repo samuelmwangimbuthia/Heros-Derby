@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/styles.css" rel="stylesheet">
     <title>{% block title %}{% endblock %}</title>
+    {% block header %}{% endblock %}
 </head>
 <body>
     <div class="container">
@@ -37,4 +38,6 @@
     </div>
     <script src="/static/scripts.js" type="text/javascript"></script>
 </body>
+{% block scripts %} 
+{% endblock %}
 </html>
