@@ -8,17 +8,27 @@
     <title>{% block title %}{% endblock %}</title>
     {% block header %}{% endblock %}
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Heros Derby</h1>
+            <div class="modal" id="modal">
+                <div class="modal-backdrop">
+                    <div class="modal-body">
+                        <button class="modal-close" id="close" onclick="closeDialog()">close</button>
+                        <h2>Wombat Newsletter</h2>
+                        <p>Sign up for our monthly newsletter. No spam.We promise!</p>
+                    </div>
+                </div>
+
         </header>
 
         <nav>
             <ul class="site-nav">
                 <li><a href="/index">Home</a></li>
                 <li><a href="/teams">Teams</a></li>
-                <li><a href="/women">Women</a></li>
+                <li><a href="/landingpage">Women</a></li>
                 {% if rows %}
                     <li>Loggedin as {{rows}}<a href="/logout">Logout</a></li>
                 {% else %}

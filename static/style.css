@@ -1,0 +1,220 @@
+/* Global Styles */
+:root
+{
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after
+{
+    box-sizing: inherit;
+}
+body
+{
+    background-color: #dedcdc;
+    font-family: helvetica, Arial, sans-serif;
+    
+}
+
+body * + *
+{
+    margin-top: 1.5em;
+}
+
+.container
+{
+    background-color: #fff;
+    box-shadow: 0 15px 25px #605f5f;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 1em;
+}
+  
+h1, h2, h3, h4 
+{
+    margin: 0;
+}
+
+.site-nav 
+{
+    display: flex;
+    padding: .5em;
+    list-style-type: none;
+    background-color: #41fee8;
+    border-radius: .2em;
+}
+.site-nav > li
+{
+    margin-top: 0;
+}
+
+.site-nav > li > a 
+{
+    display: block;
+    padding: 0.5em 1em;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+.site-nav > li + li 
+{
+    margin-left: 1.5em;
+}
+
+.site-nav > .nav-right
+{
+    margin-left: auto;
+}
+
+  
+  /* Hero Section */
+  .hero img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+  
+  /* Overview Section */
+  .overview {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  /* Featured Games Section */
+  .featured-games {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .game {
+    display: inline-block;
+    margin: 0 20px;
+  }
+  
+  .game img {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+  }
+  
+  /* Testimonials Section */
+  .testimonials {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .testimonial {
+    margin-bottom: 30px;
+  }
+  
+  .testimonial p {
+    font-style: italic;
+  }
+  
+  .testimonial .author {
+    font-weight: bold;
+  }
+  
+  /* Features Section */
+  .features {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .features ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .features li {
+    margin-bottom: 10px;
+  }
+  
+  /* Screenshots Section */
+  .screenshots {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .screenshots img {
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+  }
+  
+  /* Pricing Section */
+  .pricing {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .pricing ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .pricing li {
+    margin-bottom: 10px;
+  }
+  
+  /* Contact Section */
+  .contact {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .contact form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .contact input,
+  .contact textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .contact button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Footer Section */
+  footer {
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+  
+  /* Landing page styles */
+  .landing {
+    min-height: 300px;
+    background-image:linear-gradient(270deg, #7d7777, transparent), url(/static/landing2.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0vw, 0vw;
+    
+  }
