@@ -11,7 +11,9 @@
 body
 {
     background-color: #dedcdc;
-    font-family: helvetica, Arial, sans-serif;
+    font-family: 'Times New Roman', helvetica, Arial, sans-serif;
+    font-size: medium;
+    margin: 1em;
 }
 
 body * + *
@@ -21,10 +23,53 @@ body * + *
 
 .container
 {
-    background-color: #fff;
-    box-shadow: 0 15px 25px #605f5f;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 0.5em;
     max-width: 1080px;
+    background-color: #ffff;    
     margin: 0 auto;
+}
+
+/* add background color and padding to the tiles*/
+.tile
+{
+    padding: 0.5em;
+    background-color: #e9eceff7;
+    margin-top: 0;
+    margin-left: .5em;
+}
+
+/* General page layout */
+nav, .landing, .featured-games, .overview, footer
+{
+    grid-column: 1/4;
+}
+.main-flex
+{
+    display: flex;
+}
+
+.main-flex > * + * 
+{
+    margin-top: 0;
+} 
+
+.column-asidebar1
+{
+    flex: 0 0 100px;
+}
+
+.column-asidebar2 
+{
+    flex: 0 0 100px;
+    
+}
+
+.column-main
+{
+    flex: 1
 }
 
 .site-nav 
@@ -32,13 +77,15 @@ body * + *
     display: flex;
     padding: .5em;
     list-style-type: none;
-    background-color: #41fee8;
+    /*background-image: linear-gradient(90deg, #8bf9ec, #41fee8); */
     border-radius: .2em;
+    margin-bottom: 0;
 }
 
 .site-nav > li
 {
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .site-nav > li > a 
@@ -47,6 +94,7 @@ body * + *
     padding: 0.5em 1em;
     color: rgb(0, 0, 0);
     text-decoration: none;
+
 }
 
 .site-nav > li + li 
@@ -54,42 +102,27 @@ body * + *
     margin-left: 1.5em;
 }
 
+
 .site-nav > .nav-right
 {
     margin-left: auto;
+    background-color: #88f78a;
+    border-radius: 1em;
 }
 
-/* add background color and padding to the tiles*/
-.tile > *
+.register 
 {
-    padding: 1em;
-    background-color: #fff;
-    box-shadow: 0 15px 25px;
+    background-color: #00f304;
+    border-radius: 1em;
+    color: white;
 }
-/*styling the main element*/
-.grid
+.logo
 {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 0.5em;
+    margin-right: 5em;
+    
 }
 
-/* styling the main */
-.column-sidebar1
-{
-    grid-column-start: 1/2;
-}
 
-.column-main
-{
-    grid-column: 2/3;
-}
-
-.column-sidebar2
-{
-    grid-column: 3/4;
-}
 
 /* login page styles */
 .login-box 
@@ -188,8 +221,8 @@ body * + *
 }
 
 table {
-    border-collapse: collapse;
     width: 100%;
+   
 }
 
 th, td {
@@ -202,7 +235,7 @@ th {
     background-color: #f2f2f2;
 }
 body .table-container {
-    padding: 20px; 
+    padding: 1em; 
 }
 
 /*styling the search button */
@@ -226,10 +259,6 @@ select {
     margin-top: 10px;
 }
 
-/* style the landing page */
-.landing {
-    background-image: url("/static/landing2.jpg");
-}
 
 .modal 
 {
@@ -260,3 +289,11 @@ select {
 {
     cursor: pointer;
 }
+
+  /* Footer Section */
+  footer {
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 20px;
+    margin: 0;
+  }

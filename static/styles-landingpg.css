@@ -1,0 +1,69 @@
+
+  /* Landing page styles */
+  .landing {
+    display: flex;
+    color: #000000;
+    min-height: 300px;
+    padding-left: 1.5em;
+    margin-top: 0;
+    background-color: azure;
+  }
+
+  .column1 {
+    flex: 2;
+  }
+  .column2 {
+    flex: 1;
+    background-color: #cee7cf;
+    background-size: contain;
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 1em 1.5em;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 1em;
+    text-decoration: none;
+    border-radius: 0.5em;
+    margin-top: 20px;
+  }
+
+  .column2> img
+  {
+    border-radius: 50%;
+    border: 0.1em solid green;
+    padding: 0.5em;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Featured Games Section */
+  .featured-games {
+    text-align: center;
+    background-color: #d8f1e0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  /* Overview Section */
+  .overview {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #cee7cf;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  .game {
+    display: inline-block;
+    margin: 0 20px;
+  }
+  
+  .game img {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+  }
+  
+
+  
