@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %} 
+    Football Games Website
+{% endblock %}
+
+{% block header %}
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles-landingpg.css">
+{% endblock %}
+
+{% block main %}
+
+    <div class="landing">
+        <div class="column1">
+            <h1>Your Local Football
+                <br> Games Experience!</h1>
+            <p>Checkout Upcoming Matches and Results on Matches Played in your Neighborhood.</p>
+            <a href="/index" class="cta-button">Get in the Game</a>
+        </div>
+        
+        <div class="column2">              
+           <img src="/static/football_on_shores.jpg" alt="" class="landing">
+        </div>
+    </div>
+    <section class="featured-games">
+        <h3>Featured Games</h3>
+        <div class="game">
+            <img src="game1.jpg" alt="Game 1">
+            <img src="game1.jpg" alt="Game 1">
+            <h4>Game 1</h4>
+            <p>Results</p>
+        </div>
+        <div class="game">
+            <img src="game2.jpg" alt="Game 2">
+            <img src="game2.jpg" alt="Game 2">
+            <h4>Game 2</h4>
+            <p>Description of Game 2</p>
+        </div>
+        <div class="game">
+            <img src="game3.jpg" alt="Game 3">
+            <img src="game3.jpg" alt="Game 3">
+            <h4>Game 3</h4>
+            <p>Description of Game 3</p>
+        </div>
+    </section>
+    <section class="overview">
+    <h3>Brief Overview</h3>
+    <p>Our football games website offers realistic and immersive virtual football experiences for players of all skill levels. Join our community and enjoy thrilling matches against players from around the world.</p>
+    </section>
+    <section class="featured-games">
+        <h3>Upcoming Games</h3>
+        <div class="game">
+            <img src="game1.jpg" alt="Game 1">
+            <img src="game1.jpg" alt="Game 1">
+            <h4>Game 1</h4>
+            <p>Description of Game 1</p>
+        </div>
+        <div class="game">
+            <img src="game2.jpg" alt="Game 2">
+            <img src="game2.jpg" alt="Game 2">
+            <h4>Game 2</h4>
+            <p>Description of Game 2</p>
+        </div>
+        <div class="game">
+            <img src="game3.jpg" alt="Game 3">
+            <img src="game3.jpg" alt="Game 3">
+            <h4>Game 3</h4>
+            <p>Description of Game 3</p>
+        </div>
+    </section>
+
+
+{% endblock %}

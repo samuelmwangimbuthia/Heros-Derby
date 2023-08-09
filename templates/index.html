@@ -5,14 +5,14 @@
 
 {% block header %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/static/styles.css">
 {% endblock %}
 
 {% block main %}
-
-<div class="tile grid">
-    <aside class="column-asidebar1">
-        <h3>Recent matches</h3>
+<div class="main-flex">
+    <aside class="column-asidebar1 tile">
         <table>
+            <thead>Recent Matches</thead>
             <tr>
                 <th>ID</th>
                 <th>Home Team</th>
@@ -107,11 +107,10 @@
           </a>
       
     </aside>
-    <main class="column-main">
+    <main class="column-main tile">
         <div>
-            <h2>Results</h2>
             <table>
-                <thead>
+                <thead>Results</thead>
                     <tr>
                         <th>Team Name</th>
                         <th>Points</th>
@@ -119,7 +118,7 @@
                         <th>Total Draws</th>
                         <th>Total Losses</th>
                     </tr>
-                </thead>
+
                 <tbody>
                     {% for result in results %}
                     <tr>
@@ -132,9 +131,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div>
-            </div>
-            <h2>Fixtures</h2>
             <table>
                 <thead>Fixtures</thead>
                 <tr>
@@ -156,8 +152,8 @@
             </table>
         </div>
     </main>
-    <aside class="column-asidebar2">
-        <div>
+    <aside class="column-asidebar2 tile">
+        <div class="search-player">
             <h4>Search A Player</h4>
             <div class="search-container">
                 <form action="/search" method="post">
@@ -166,7 +162,7 @@
                 </form>
             </div>
         </div>
-        <div>
+        <div class="Featured-player">
             <h4>Featured player</h4>
             <div>
                 <img src="/static/{{player[1]}}.jpg" alt="">
@@ -177,7 +173,7 @@
                 <p>Nationality: {{player[4]}}</p>              
             </div>
         </div>
-        <div>
+        <div class="sponsor">
             <h4>Sponsor A Team</h4>
             <form action="/sponsor" method="post">
                 <label for="sponsor">Sponsorship</label>
@@ -191,8 +187,8 @@
                 <input type="submit" value="Submit" />
             </form>           
         </div>
-    </aside>
-</div>  
+    </aside>  
+</div>
 {% endblock %} 
 {{rows}}
 {% block scripts %}

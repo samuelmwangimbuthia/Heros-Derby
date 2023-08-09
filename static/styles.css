@@ -11,7 +11,9 @@
 body
 {
     background-color: #dedcdc;
-    font-family: helvetica, Arial, sans-serif;
+    font-family: 'Times New Roman', helvetica, Arial, sans-serif;
+    font-size: medium;
+    margin: 1em;
 }
 
 body * + *
@@ -21,10 +23,53 @@ body * + *
 
 .container
 {
-    background-color: #fff;
-    box-shadow: 0 15px 25px #c47979;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 0.5em;
     max-width: 1080px;
+    background-color: #ffff;    
     margin: 0 auto;
+}
+
+/* add background color and padding to the tiles*/
+.tile
+{
+    padding: 0.5em;
+    background-color: #e9eceff7;
+    margin-top: 0;
+    margin-left: .5em;
+}
+
+/* General page layout */
+nav, .landing, .featured-games, .overview, footer
+{
+    grid-column: 1/4;
+}
+.main-flex
+{
+    display: flex;
+}
+
+.main-flex > * + * 
+{
+    margin-top: 0;
+} 
+
+.column-asidebar1
+{
+    flex: 0 0 100px;
+}
+
+.column-asidebar2 
+{
+    flex: 0 0 100px;
+    
+}
+
+.column-main
+{
+    flex: 1
 }
 
 .site-nav 
@@ -32,22 +77,24 @@ body * + *
     display: flex;
     padding: .5em;
     list-style-type: none;
-    background-color: #5f4b44;
+    /*background-image: linear-gradient(90deg, #8bf9ec, #41fee8); */
     border-radius: .2em;
+    margin-bottom: 0;
 }
 
 .site-nav > li
 {
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .site-nav > li > a 
 {
     display: block;
     padding: 0.5em 1em;
-    background-color: #cc6b5a;
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
+
 }
 
 .site-nav > li + li 
@@ -55,42 +102,27 @@ body * + *
     margin-left: 1.5em;
 }
 
+
 .site-nav > .nav-right
 {
     margin-left: auto;
+    background-color: #88f78a;
+    border-radius: 1em;
 }
 
-/* add background color and padding to the tiles*/
-.tile > *
+.register 
 {
-    padding: 1em;
-    background-color: #fff;
-    box-shadow: 0 15px 25px #c47979;
+    background-color: #00f304;
+    border-radius: 1em;
+    color: white;
 }
-/*styling the main element*/
-.grid
+.logo
 {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 0.5em;
+    margin-right: 5em;
+    
 }
 
-/* styling the main */
-.column-sidebar1
-{
-    grid-column-start: 1/2;
-}
 
-.column-main
-{
-    grid-column: 2/3;
-}
-
-.column-sidebar2
-{
-    grid-column: 3/4;
-}
 
 /* login page styles */
 .login-box 
@@ -151,28 +183,36 @@ body * + *
     color: #03e9f4;
     font-size: 12px;
 }
-.login-box form button {
-    position: relative;
-    display: inline-block;
+.login-box form button, .register-button {
     padding: 0.5em 1em;
+    border: 0;
+    border-radius: 0.5em;
+    background-image: linear-gradient(to bottom, #57b, #148);
+    box-shadow: 0.1em 0.1em 0.5em #124;
     color: #03e9f4;
     font-size: 16px;
-    text-decoration: none;
     text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    margin-top: 40px;
-    letter-spacing: 4px
+    letter-spacing: 1px;
   }
 
 .reset-button 
 {
     margin-top: -8px;
-    color: #3498db;
+    color: #03e9f4;
     text-decoration: none;
 }
 .reset-button a:hover {
     text-decoration: underline;
+}
+
+.register-button a {
+    text-decoration: none;
+    color: #03e9f4;
+}
+
+.login-box form button:active, .register-button:active  {
+    box-shadow: inset 0 0 0.5em #124,
+    inset 0 0.5em 1em rgba(0,0,0,0.4);
 }
 
 .warn
@@ -181,8 +221,8 @@ body * + *
 }
 
 table {
-    border-collapse: collapse;
     width: 100%;
+   
 }
 
 th, td {
@@ -195,7 +235,7 @@ th {
     background-color: #f2f2f2;
 }
 body .table-container {
-    padding: 20px; 
+    padding: 1em; 
 }
 
 /*styling the search button */
@@ -219,3 +259,41 @@ select {
     margin-top: 10px;
 }
 
+
+.modal 
+{
+    display: none;
+   
+}
+.modal-backdrop 
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-body 
+{
+    position: fixed;
+    top: 3em;
+    bottom: 3em;
+    right: 20%;
+    left: 20%;
+    padding: 2em 3em;
+    background-color: white;
+    overflow: auto;
+}
+.modal-close 
+{
+    cursor: pointer;
+}
+
+  /* Footer Section */
+  footer {
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 20px;
+    margin: 0;
+  }

@@ -119,6 +119,11 @@ def featuredPlayer():
     player = rows.fetchone()
     return player
 
+# Render the landing page
+@app.route("/")
+def landingpage():
+    return render_template("landingpage.html")
+
 @app.route("/index")
 def index():
     recent_matches = display_recent_matches()
@@ -236,10 +241,10 @@ def add_match():
         matchTime = request.form.get("match_time")
         homeScore = request.form.get("home_score")
         awayScore = request.form.get("away_score")
-        print('%s',home)
         db.execute("INSERT INTO 'matches' (home_team_id, away_team_id, match_date, match_time, home_score, away_score) VALUES(?,?,?,?,?,?)",
                    [home, away, matchDate, matchTime, homeScore, awayScore])
         con.commit()
+        # display the dialog
     return render_template("addMatch.html")
 
 # search for players and coaches biography
