@@ -27,6 +27,7 @@ body * + *
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 0.5em;
+    grid-row-gap: 0;
     max-width: 1080px;
     background-color: #ffff;    
     margin: 0 auto;
@@ -36,7 +37,7 @@ body * + *
 .tile
 {
     padding: 0.5em;
-    background-color: #e9eceff7;
+    background-color: #f3fff0;
     margin-top: 0;
     margin-left: .5em;
 }
@@ -128,8 +129,8 @@ nav, .landing, .featured-games, .overview, footer
 .login-box 
 {
     position: relative;
-    top: 50%;
-    left: 50%;
+    top: 1em;
+    left: 2em;
     Width: 400px;
     padding: 1em;
     background: rgba(0, 0, 0, .5);
@@ -155,9 +156,8 @@ nav, .landing, .featured-games, .overview, footer
 {
     width: 100%;
     padding: 1em 0;
-    font-size: 16px;
     color: #fff;
-    margin-bottom: 30px;
+    margin-bottom: 0;
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;
@@ -168,21 +168,12 @@ nav, .landing, .featured-games, .overview, footer
     position: absolute;
     top:0;
     left: 0;
-    font-size: 16px;
     padding: .0025em 0;
     color: #fff;
     pointer-events: none;
     transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label
-{
-    top: -20px;
-    left: 0;
-    color: #03e9f4;
-    font-size: 12px;
-}
 .login-box form button, .register-button {
     padding: 0.5em 1em;
     border: 0;
@@ -260,11 +251,14 @@ select {
 }
 
 
+/* Modal dialog to require the user to read something or input something before continuing */
+/* Initially hidden with display: none; property */
 .modal 
 {
-    display: none;
-   
+    display: none;  
 }
+
+/* a backdrop to obsecure content behind the modal */
 .modal-backdrop 
 {
     position: fixed;
@@ -272,7 +266,7 @@ select {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 .modal-body 
 {
@@ -285,9 +279,31 @@ select {
     background-color: white;
     overflow: auto;
 }
+
+/* close button styles */
 .modal-close 
 {
     cursor: pointer;
+    position:absolute;
+    top: 0.1em;
+    right: 0.1em;
+    left: auto;
+    font-size: 2em;
+    height: 1em;
+    width: 1em;
+    text-indent: 10em;
+    overflow: hidden;
+    border: 0;
+}
+
+.modal-close::after 
+{
+    position: absolute;
+    line-height: 0.5;
+    top: 0.2em;
+    left: 0.1em;
+    text-indent: 0;
+    content: "\00D7";
 }
 
   /* Footer Section */
