@@ -14,7 +14,11 @@
         <div class="column1">
             <h1>Your Local Football
                 <br> Games Experience!</h1>
-            <p>Checkout Upcoming Matches and Results on Matches Played in your Neighborhood.</p>
+            <p>Checkout <a href="/index">Upcoming Matches and Results</a>  on Matches Played in your Neighborhood.</p>
+            <br>
+            <br>
+            <p>Our football games website offers players, fans and coaches a platform to showcase their skills and popularize their teams. 
+                Join the community and let your star shine all around the world.</p>
             <a href="/index" class="cta-button">Get in the Game</a>
         </div>
         
@@ -24,49 +28,50 @@
     </div>
     <section class="featured-games">
         <h3>Featured Games</h3>
-        <div class="game">
-            <img src="game1.jpg" alt="Game 1">
-            <img src="game1.jpg" alt="Game 1">
-            <h4>Game 1</h4>
-            <p>Results</p>
-        </div>
-        <div class="game">
-            <img src="game2.jpg" alt="Game 2">
-            <img src="game2.jpg" alt="Game 2">
-            <h4>Game 2</h4>
-            <p>Description of Game 2</p>
-        </div>
-        <div class="game">
-            <img src="game3.jpg" alt="Game 3">
-            <img src="game3.jpg" alt="Game 3">
-            <h4>Game 3</h4>
-            <p>Description of Game 3</p>
-        </div>
-    </section>
-    <section class="overview">
-    <h3>Brief Overview</h3>
-    <p>Our football games website offers realistic and immersive virtual football experiences for players of all skill levels. Join our community and enjoy thrilling matches against players from around the world.</p>
+        {% for game in games %}
+            <div class="game">
+                {% if game[1] %}
+                     <img src="/static/logo/{{game[1]}}_Logo.png" alt="">
+                {% else  %}
+                    <img src="/static/logo/logo-dummy.png" alt="No logo">
+
+                {% endif %}
+
+                {% if game[2] %}
+                    <img src="/static/logo/{{game[2]}}_Logo.png" alt="">
+                {% else  %}
+                    <img src="/static/logo/logo-dummy.png" alt="No logo">
+                {% endif %}
+                <p>
+
+                    <span>{{game[1]}} vs </span>
+                    <span >{{game[2]}}</span>
+                </p>
+                <p>Results {{game[3]}}:{{game[4]}}</p>
+            </div>
+        {% endfor %}
     </section>
     <section class="featured-games">
         <h3>Upcoming Games</h3>
+        {% for fix in fixtures %}
         <div class="game">
-            <img src="game1.jpg" alt="Game 1">
-            <img src="game1.jpg" alt="Game 1">
-            <h4>Game 1</h4>
-            <p>Description of Game 1</p>
+            {% if fix[0] %}
+                <img src="/static/logo/{{fix[0]}}_Logo.png" alt="">
+            {% else  %}
+                <img src="/static/logo/logo-dummy.png" alt="No logo">
+
+            {% endif %}
+
+            {% if fix[1] %}
+                <img src="/static/logo/{{fix[1]}}_Logo.png" alt="">
+            {% else  %}
+                <img src="/static/logo/logo-dummy.png" alt="No logo">
+            {% endif %}
+            <p>{{fix[0]}} Vs: {{fix[1]}}</p>
+            <p>Time: {{fix[3]}} Venue: {{fix[4]}}</p>
         </div>
-        <div class="game">
-            <img src="game2.jpg" alt="Game 2">
-            <img src="game2.jpg" alt="Game 2">
-            <h4>Game 2</h4>
-            <p>Description of Game 2</p>
-        </div>
-        <div class="game">
-            <img src="game3.jpg" alt="Game 3">
-            <img src="game3.jpg" alt="Game 3">
-            <h4>Game 3</h4>
-            <p>Description of Game 3</p>
-        </div>
+        {% endfor %}
+
     </section>
 
 

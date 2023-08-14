@@ -28,7 +28,7 @@ with sqlite3.connect("derby.db", check_same_thread=False) as con:
 def display_recent_matches():
     # Calculate the date three days ago
     today = datetime.date.today()
-    three_days_ago = today - datetime.timedelta(days=100)
+    three_days_ago = today - datetime.timedelta(days=20)
     # Execute a SELECT query to fetch recent matches
     #db.execute("SELECT * FROM matches WHERE match_date >= ?", (three_days_ago,))
     db.execute("""
@@ -122,7 +122,16 @@ def featuredPlayer():
 # Render the landing page
 @app.route("/")
 def landingpage():
-    return render_template("landingpage.html")
+    recent_matches = display_recent_matches()
+    upcoming = fixtures()
+    games = []
+    upcoming_games = []
+    for match in recent_matches:
+            games.append(match)
+    for fix in upcoming:
+            upcoming_games.append(fix)
+        
+    return render_template("landingpage.html", games = games, recent_matches=recent_matches, fixtures = upcoming_games)
 
 @app.route("/index")
 def index():
@@ -235,6 +244,8 @@ def add_match():
         awayTeam = request.form.get("away_team")
         db.execute("SELECT id FROM teams WHERE name = ?", (homeTeam,))
         home = db.fetchone()
+        print(home[0])
+        print(f"Type home:{type(home[0])}")
         db.execute("SELECT id FROM teams WHERE name = ?", (awayTeam,))
         away = db.fetchone()
         matchDate = request.form.get("match_date") 
@@ -242,10 +253,32 @@ def add_match():
         homeScore = request.form.get("home_score")
         awayScore = request.form.get("away_score")
         db.execute("INSERT INTO 'matches' (home_team_id, away_team_id, match_date, match_time, home_score, away_score) VALUES(?,?,?,?,?,?)",
-                   [home, away, matchDate, matchTime, homeScore, awayScore])
+                   [home[0], away[0], matchDate, matchTime, homeScore, awayScore])
         con.commit()
         # display the dialog
     return render_template("addMatch.html")
+@app.route("/addTeam", methods=["GET", "POST"])
+def add_team():
+    # if not logged in , login first to add a match
+    if request.method == "POST":
+        # insert teams into the database
+        # lookup the id for the teams and if not created insert it
+        team_name = request.form.get("teamName") 
+        county = request.form.get("county") 
+        constituency = request.form.get("constituency")
+        ward = request.form.get("ward")
+        stadium = request.form.get("stadium")
+        db.execute("SELECT name FROM teams WHERE name = ?", (team_name))
+        team = db.fetchone()
+        if team:
+            myWarning = "team already exists"
+            return myWarning
+        else:
+            db.execute("INSERT INTO 'teams' (name, county, constituency, ward, stadium) VALUES(?,?,?,?,?)",
+                   [team_name, county, constituency, ward, stadium])
+            con.commit()
+        # display the dialog
+    return render_template("teams.html", myWarning = myWarning)
 
 # search for players and coaches biography
 @app.route("/search", methods=["GET","POST"])
@@ -260,4 +293,4 @@ def search():
     return render_template("player.html", player = player)
 
 if __name__ == "__main__":
-    app.run(debug="True")
+    app.run(host="0.0.0.0", port = 8080)
