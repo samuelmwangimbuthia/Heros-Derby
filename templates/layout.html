@@ -32,13 +32,27 @@
                 <li class="logo"><a href="/">Heros Derby</a></li>
                 <li><a href="/index">Home</a></li>
                 <li><a href="/teams">Teams</a></li>
-                <li><button id="open">Newsletter</button></li>
+                <li><a id="open">Newsletter</a></li>
                 {% if rows %}
                     <li>Loggedin as {{rows}}<a href="/logout">Logout</a></li>
                 {% else %}
-                    <li class="nav-right"><a href="/login">Login</a></li>   
+                   <!--<li class="nav-right"><a href="/login">Login</a></li>-->
+                   <li class="nav-right">
+                       <div class="dropdown">
+                           <div class="dropdown-label">Login</div>
+                           <div class="dropdown-menu">
+                               <ul class="submenu">
+                                   <li><a href="/login">User</a></li>
+                                   <li><a href="/login">Player</a></li>
+                                   <li><a href="/login">Coach</a></li>
+                                   <li><a href="/login">Sponsor</a></li>
+                               </ul>
+                           </div>                  
+                       </div>   
+                   </li>
                 {% endif %}            
                 <li class="register"><a href="/register">Register</a></li>
+                
             </ul>
         </nav>
 

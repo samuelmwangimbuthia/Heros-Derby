@@ -28,4 +28,37 @@
             {% endfor %}
         </table>
 </div>
+
+
+<div class="login-box">
+    <h2>Add a local team</h2>
+    <form action="/addTeam" method="post">
+        <div class="user-box">
+            <input type="text" name="teamName" placeholder="Name">
+            <label>Name</label>         
+        </div>
+        <div class="user-box">
+            <input type="text" name="county" placeholder="County">
+            <label>County</label>         
+        </div>
+        <div class="user-box">
+            <input type="text" name="constituency" placeholder="constituency">
+            <label>Constituency</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="ward" placeholder="Ward">
+            <label>Ward</label>
+        </div>
+        
+        <div class="user-box">
+            <input type="text" name="stadium" placeholder="Stadium">
+            <label>Stadium</label>
+
+        </div>
+        <button type="submit">Submit</button>
+        {{myWarning}}
+    </form>
+</div>
+
+
 {% endblock %}
