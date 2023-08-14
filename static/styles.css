@@ -119,9 +119,80 @@ nav, .landing, .featured-games, .overview, footer
 }
 .logo
 {
-    margin-right: 5em;
+    margin-right: 2em;
     
 }
+/* dropdown styles */
+/* establish containing block for the absolutely positioned menu */
+.dropdown
+{
+    position: relative;
+}
+
+.dropdown-menu 
+{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    min-width: 100%;
+    background-color: #eee;
+ }
+
+/* reveal the menu on hover */
+.dropdown:hover .dropdown-menu 
+{
+    display: block;
+} 
+.submenu 
+{
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    border: 1px solid #999;
+}
+.submenu > li + li 
+{
+    border-top: 1px solid #999;
+}
+.submenu > li > a
+{
+    display: block;
+    padding: .5em 1.5em;
+    background-color: #eee;
+    color: #369;
+    text-decoration: none;
+}
+.submenu > li > a:hover 
+{
+    background-color: #fff;
+}
+
+.dropdown-label
+{
+    padding: 0.5em 2em 0.5em 1.5em;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+/*create an empty element and place it on the right side of the label */
+/* uses the top border to form a down arrow */
+.dropdown-label::after
+{
+    content: "";
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    border: 0.3em solid;
+    border-color: black transparent transparent; 
+}
+
+/* on hover, changes to an up arrow */
+.dropdown:hover .dropdown-label::after
+ {
+    top: 0.7em;
+    border-color: transparent transparent black;
+}
+
 
 
 
@@ -217,9 +288,11 @@ table {
 }
 
 th, td {
-    padding: 8px;
+    padding: 0.4em;
     text-align: left;
+    font-size: 0.85em;
     border-bottom: 1px solid #ddd;
+    text-wrap: nowrap;
 }
 
 th {
@@ -259,6 +332,7 @@ select {
 }
 
 /* a backdrop to obsecure content behind the modal */
+/* apply z-index to the positioned ancestor to bring the entire stacking context forward */
 .modal-backdrop 
 {
     position: fixed;
@@ -267,6 +341,7 @@ select {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
 }
 .modal-body 
 {
@@ -313,3 +388,4 @@ select {
     padding: 20px;
     margin: 0;
   }
+
