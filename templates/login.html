@@ -7,14 +7,17 @@
 {% block main %}
 <div class="login-box">
     <h2>Login</h2>
+    <p class="dynamic_class" style="color: red;">{{message}}</p>   
     <form action="/login" method="post">
         <div class="user-box">
-            <input autocomplete="off" autofocus  id="username" name="username" type="text">
             <label>Username</label>
+            <input autocomplete="off" autofocus  id="username" name="username" type="text">
+            
         </div>
         <div class="user-box">
-            <input id="password" name="password" type="password">
             <label>Password</label>
+            <input id="password" name="password" type="password">
+            
         </div>
         <button class="btn btn-primary" type="submit">Login</button>
     </form>

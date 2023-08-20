@@ -14,6 +14,7 @@ body
     font-family: 'Times New Roman', helvetica, Arial, sans-serif;
     font-size: medium;
     margin: 1em;
+   
 }
 
 body * + *
@@ -57,6 +58,11 @@ nav, .landing, .featured-games, .overview, footer
     margin-top: 0;
 } 
 
+.login-box
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
 .column-asidebar1
 {
     flex: 0 0 100px;
@@ -93,7 +99,7 @@ nav, .landing, .featured-games, .overview, footer
 {
     display: block;
     padding: 0.5em 1em;
-    color: rgb(0, 0, 0);
+    color: #000000;
     text-decoration: none;
 
 }
@@ -133,35 +139,41 @@ nav, .landing, .featured-games, .overview, footer
 {
     display: none;
     position: absolute;
-    left: 0;
+    left: -20em;
     top: 0.5em;
     min-width: 100%;
-    background-color: #eee;
+    background-color: #f3fff0;
+   
  }
 
 /* reveal the menu on hover */
 .dropdown:hover .dropdown-menu 
 {
-    display: block;
+    display: flex;
 } 
 .submenu 
 {
     padding-left: 0;
     margin: 0;
     list-style-type: none;
+    border-radius: 0.5em;
     border: 1px solid #999;
+    
+    display: flex;
 }
 .submenu > li + li 
 {
-    border-top: 1px solid #999;
+    margin-left: 1.5em; 
+    margin-top: 0;
 }
 .submenu > li > a
 {
     display: block;
     padding: .5em 1.5em;
-    background-color: #eee;
-    color: #369;
+    background-color: #d8f1e0;
+    color: #000000;
     text-decoration: none;
+    margin: 0.1em;
 }
 .submenu > li > a:hover 
 {
@@ -171,8 +183,6 @@ nav, .landing, .featured-games, .overview, footer
 .dropdown-label
 {
     padding: 0.5em 2em 0.5em 1.5em;
-    border: 1px solid #ccc;
-    background-color: #eee;
 }
 /*create an empty element and place it on the right side of the label */
 /* uses the top border to form a down arrow */
@@ -218,31 +228,23 @@ nav, .landing, .featured-games, .overview, footer
     text-align: center;
 }
 
-.login-box .user-box
-{
-    position: relative;
-}
-
 .login-box .user-box input
 {
-    width: 100%;
-    padding: 1em 0;
-    color: #fff;
+    width: 100%; 
+    color: #000000;
+    padding: 1px 2px;
     margin-bottom: 0;
+    margin-top: 0.5em;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #5a5858;
     outline: none;
-    background: transparent;
 }
 
 .login-box .user-box label {
-    position: absolute;
     top:0;
     left: 0;
     padding: .0025em 0;
-    color: #fff;
-    pointer-events: none;
-    transition: .5s;
+    color: #03e9f4;
 }
 
 .login-box form button, .register-button {
@@ -255,6 +257,7 @@ nav, .landing, .featured-games, .overview, footer
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    width: 100%;
   }
 
 .reset-button 
@@ -284,6 +287,7 @@ nav, .landing, .featured-games, .overview, footer
 
 table {
     width: 100%;
+    font-size: 0.85em;
    
 }
 
@@ -389,3 +393,17 @@ select {
     margin: 0;
   }
 
+.hidden
+{
+    visibility: hidden;
+}
+.visible
+{
+    visibility: visible;
+   
+}
+.bio * + *
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
