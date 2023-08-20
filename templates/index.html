@@ -162,17 +162,17 @@
                 </form>
             </div>
         </div>
-        <div class="Featured-player">
-            <h4>Featured player</h4>
-            <div>
-                <img src="/static/{{player[1]}}.jpg" alt="">
-                <h4>Name: {{player[1]}}</h4>
-                <p><a href="">Club: {{player[2]}}</a></p>
-                <p>Position: {{player[5]}}</p>
-                <p>Age: {{player[3]}}</p>
-                <p>Nationality: {{player[4]}}</p>              
+            <div class="Featured-player">
+                <h4>Featured player</h4>
+                <div class="bio">
+                    <img src="/static/{{player[1]}}.jpg" alt="">
+                    <h6>Name: {{player[1]}}</h6>
+                    <p><a href="">Club: {{player[2]}}</a></p>
+                    <p>Position: {{player[5]}}</p>
+                    <p>Age: {{player[3]}}</p>
+                    <p>Nationality: {{player[4]}}</p>              
+                </div>
             </div>
-        </div>
         <div class="sponsor">
             <h4>Sponsor A Team</h4>
             <form action="/sponsor" method="post">

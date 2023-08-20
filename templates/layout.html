@@ -34,7 +34,8 @@
                 <li><a href="/teams">Teams</a></li>
                 <li><a id="open">Newsletter</a></li>
                 {% if rows %}
-                    <li>Loggedin as {{rows}}<a href="/logout">Logout</a></li>
+                    <li><a href="">Loggedin as {{rows}}</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 {% else %}
                    <!--<li class="nav-right"><a href="/login">Login</a></li>-->
                    <li class="nav-right">
@@ -51,7 +52,7 @@
                        </div>   
                    </li>
                 {% endif %}            
-                <li class="register"><a href="/register">Register</a></li>
+                <li class="register dynamic_class"><a href="/register">Register</a></li>
                 
             </ul>
         </nav>
