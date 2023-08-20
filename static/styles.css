@@ -93,7 +93,7 @@ nav, .landing, .featured-games, .overview, footer
 {
     display: block;
     padding: 0.5em 1em;
-    color: rgb(0, 0, 0);
+    color: #000000;
     text-decoration: none;
 
 }
@@ -133,35 +133,41 @@ nav, .landing, .featured-games, .overview, footer
 {
     display: none;
     position: absolute;
-    left: 0;
+    left: -20em;
     top: 0.5em;
     min-width: 100%;
-    background-color: #eee;
+    background-color: #f3fff0;
+   
  }
 
 /* reveal the menu on hover */
 .dropdown:hover .dropdown-menu 
 {
-    display: block;
+    display: flex;
 } 
 .submenu 
 {
     padding-left: 0;
     margin: 0;
     list-style-type: none;
+    border-radius: 0.5em;
     border: 1px solid #999;
+    
+    display: flex;
 }
 .submenu > li + li 
 {
-    border-top: 1px solid #999;
+    margin-left: 1.5em; 
+    margin-top: 0;
 }
 .submenu > li > a
 {
     display: block;
     padding: .5em 1.5em;
-    background-color: #eee;
-    color: #369;
+    background-color: #d8f1e0;
+    color: #000000;
     text-decoration: none;
+    margin: 0.1em;
 }
 .submenu > li > a:hover 
 {
@@ -171,8 +177,6 @@ nav, .landing, .featured-games, .overview, footer
 .dropdown-label
 {
     padding: 0.5em 2em 0.5em 1.5em;
-    border: 1px solid #ccc;
-    background-color: #eee;
 }
 /*create an empty element and place it on the right side of the label */
 /* uses the top border to form a down arrow */
@@ -284,6 +288,7 @@ nav, .landing, .featured-games, .overview, footer
 
 table {
     width: 100%;
+    font-size: 0.85em;
    
 }
 
