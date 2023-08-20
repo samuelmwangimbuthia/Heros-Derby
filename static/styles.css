@@ -14,6 +14,7 @@ body
     font-family: 'Times New Roman', helvetica, Arial, sans-serif;
     font-size: medium;
     margin: 1em;
+   
 }
 
 body * + *
@@ -57,6 +58,11 @@ nav, .landing, .featured-games, .overview, footer
     margin-top: 0;
 } 
 
+.login-box
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
 .column-asidebar1
 {
     flex: 0 0 100px;
@@ -222,31 +228,23 @@ nav, .landing, .featured-games, .overview, footer
     text-align: center;
 }
 
-.login-box .user-box
-{
-    position: relative;
-}
-
 .login-box .user-box input
 {
-    width: 100%;
-    padding: 1em 0;
-    color: #fff;
+    width: 100%; 
+    color: #000000;
+    padding: 1px 2px;
     margin-bottom: 0;
+    margin-top: 0.5em;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #5a5858;
     outline: none;
-    background: transparent;
 }
 
 .login-box .user-box label {
-    position: absolute;
     top:0;
     left: 0;
     padding: .0025em 0;
-    color: #fff;
-    pointer-events: none;
-    transition: .5s;
+    color: #03e9f4;
 }
 
 .login-box form button, .register-button {
@@ -259,6 +257,7 @@ nav, .landing, .featured-games, .overview, footer
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    width: 100%;
   }
 
 .reset-button 
@@ -394,3 +393,17 @@ select {
     margin: 0;
   }
 
+.hidden
+{
+    visibility: hidden;
+}
+.visible
+{
+    visibility: visible;
+   
+}
+.bio * + *
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
