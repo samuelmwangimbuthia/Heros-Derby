@@ -312,12 +312,20 @@ def portfolio():
     images_path = 'C:/Users/admin/Desktop/Heros-Derby/static/images'
     files = os.listdir(images_path)
     myfiles = []
-    digit = 1
+    profile_photo = []
+    digit = 2
+    # populate the profile page with user photos
     for file in files:   
         if (check_persist + str(digit)) == file:
             myfiles.append(file)
             digit = digit + 1
-    return render_template("portfolio.html", check_persist=check_persist, files = myfiles)
+    
+    # set the profile photo
+    for file in files:   
+        if (check_persist + str(1)) == file:
+            profile_photo.append(file)
+
+    return render_template("portfolio.html", check_persist=check_persist, files = myfiles, profile_photo = profile_photo)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port = 8080)

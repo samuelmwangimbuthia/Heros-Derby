@@ -1,14 +1,63 @@
-.container {
+:root {
+  box-sizing: border-box;
+}
 
-    grid-auto-flow: dense; 
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
 
-  }
+body {
+  background-color: #dedcdc;
+  font-family: 'Times New Roman', helvetica, Arial, sans-serif;
+  font-size: medium;
+  margin: 1em;
+}
 
- figure {
-    margin: 0;
+.container1
+{
+  max-width: 1080px;
+  background-color: #ffff;    
+  margin: 0 auto;
+}
+
+.portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-auto-rows: 1fr;
+  grid-gap: 1em;
+  grid-auto-flow: dense; 
+  margin-top: 0;
   }
 
  img {
     max-width: 100%;
   }
+.portfolio img
+{
+  margin: 0;
+}
+.biography
+{
+  display: flex;
+  max-width: 1080px;
+  background-color: #ffff;    
+  margin: 0 auto;
+}
+.profile-pic
+{
+  flex: 1;
+}
 
+.acheivements
+{
+ flex: 2;
+}
+.profile-pic img
+{
+    border: 0.1em solid black;
+    padding: 0.5em;
+    border-radius: 50%;
+
+}

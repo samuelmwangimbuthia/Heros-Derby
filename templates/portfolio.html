@@ -1,16 +1,103 @@
-{% extends "layout.html" %}
-
-{% block title %}
-    Portfolio
-{% endblock %}
-{% block header %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/portfolio.css">
-{% endblock %}
+  <title>Portfolio</title>
+</head>
+<body> 
+  <div class="container1">
+  <nav>
+    <div class="modal" id="modal">
+        <div class="modal-backdrop">
+            <div class="modal-body">
+                <button class="modal-close" id="close" onclick="closeDialog()">close</button>
+                <h2>HerosDerby Newsletter</h2>
+                <p>Sign up for our monthly newsletter. No spam.We promise!</p>
+                <form>
+                    <p>
+                        <label for="email">Email address</label>
+                        <input type="text" name="email">
+                    </p>
+                    <p><button type="submit">Submit</button></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <ul class="site-nav">
+        <li class="logo"><a href="/">Heros Derby</a></li>
+        <li><a href="/index">Home</a></li>
+        <li><a href="/teams">Teams</a></li>
+        <li><a id="open">Newsletter</a></li>
+        {% if rows %}
+            <li><a href="/portfolio">Loggedin as {{rows}}</a></li>
+            <li><a href="/logout">Logout</a></li>
+        {% else %}
+           <!--<li class="nav-right"><a href="/login">Login</a></li>-->
+           <li class="nav-right">
+               <div class="dropdown">
+                   <div class="dropdown-label">Login</div>
+                   <div class="dropdown-menu">
+                       <ul class="submenu">
+                           <li><a href="/login">User</a></li>
+                           <li><a href="/login">Player</a></li>
+                           <li><a href="/login">Coach</a></li>
+                           <li><a href="/login">Sponsor</a></li>
+                       </ul>
+                   </div>                  
+               </div>   
+           </li>
+        {% endif %}            
+        <li class="register dynamic_class"><a href="/register">Register</a></li>
+        
+    </ul>
+</nav>
+  <main>
+   
 
-{% block main %}
-    {% for file in files%}
-        <figure>
-          <img src="/static/images/{{file}}" alt="{{file}}" />
-        </figure>
-    {% endfor %}
-{% endblock %}
+      <div class="biography">
+        <div class="profile-pic">
+          {% for file in profile_photo %}
+            {% if file %}
+            <img src="/static/images/{{file}}" alt="">
+            {% else %}
+            <img src="/static/logo/logo-dummy.png" alt="">
+            {% endif %}
+          {% endfor %}
+          <p>
+            Member of parliament Starehe Constituency.
+          </p>
+        </div>
+        <div class="acheivements">
+          <table>
+            <tr>
+                <th>Goals</th>
+                <th>Assists</th>
+                <th>Trophies</th>
+                <th>Team</th>
+            </tr>
+            {% for match in recent_matches %}
+            <tr>
+                <td>{{ match[0] }}</td>
+                <td>{{ match[1] }}</td>
+                <td>{{ match[2] }}</td>
+                <td>{{ match[3] }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <div class="portfolio">
+        {% for file in files%}
+              <img src="/static/images/{{file}}" alt="{{file}}" />
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+  
+
+
