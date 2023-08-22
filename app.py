@@ -180,14 +180,12 @@ def login():
                 # set session username
                 session["user_username"] = rows[1]
                 # Redirect user to home page
-                check_persist = session.get("user_username")
-                print(check_persist)
                 recent_matches = display_recent_matches()
                 fixes = fixtures()
                 ranks = rank_teams()
                 results = show_results()
                 player = featuredPlayer()
-                
+                check_persist = session.get("user_username")
                 return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player) 
             else:
                 message = "User doesn't exist"
@@ -306,6 +304,20 @@ def search():
         else:
             return "No player name supplied"
     return render_template("player.html", player = player)
+
+@app.route("/portfolio")
+def portfolio():
+    check_persist = session.get("user_username")
+    print(check_persist)
+    images_path = 'C:/Users/admin/Desktop/Heros-Derby/static/images'
+    files = os.listdir(images_path)
+    myfiles = []
+    digit = 1
+    for file in files:   
+        if (check_persist + str(digit)) == file:
+            myfiles.append(file)
+            digit = digit + 1
+    return render_template("portfolio.html", check_persist=check_persist, files = myfiles)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port = 8080)

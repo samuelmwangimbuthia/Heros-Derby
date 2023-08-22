@@ -34,7 +34,7 @@
                 <li><a href="/teams">Teams</a></li>
                 <li><a id="open">Newsletter</a></li>
                 {% if rows %}
-                    <li><a href="">Loggedin as {{rows}}</a></li>
+                    <li><a href="/portfolio">Loggedin as {{rows}}</a></li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
                    <!--<li class="nav-right"><a href="/login">Login</a></li>-->
@@ -58,11 +58,11 @@
         </nav>
 
         {% block main %}{% endblock %}
-
         <footer>
             <p>&copy; 2023 A Peace Building Initiative. All rights reserved.</p>
         </footer>
     </div>
+    
     <script src="/static/scripts.js" type="text/javascript"></script>
 </body>
 {% block scripts %} 

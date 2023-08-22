@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+{% block header %}
+  <link rel="stylesheet" href="/static/portfolio.css">
+{% endblock %}
+
+{% block main %}
+    {% for file in files%}
+        <figure>
+          <img src="/static/images/{{file}}" alt="{{file}}" />
+        </figure>
+    {% endfor %}
+{% endblock %}
