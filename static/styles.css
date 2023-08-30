@@ -117,6 +117,15 @@ nav, .landing, .featured-games, .overview, footer
     border-radius: 1em;
 }
 
+.site-nav > .nav-img
+{
+    border-radius: 50%;
+    border: none;
+    height: 30px;
+    overflow: hidden;
+    width: 30px;
+}
+
 .register 
 {
     background-color: #00f304;
@@ -211,10 +220,10 @@ nav, .landing, .featured-games, .overview, footer
 {
     position: relative;
     top: 1em;
-    left: 2em;
+    left: 24em;
     Width: 400px;
     padding: 1em;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .8);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, .7); 
     border-radius: 1em;
@@ -330,24 +339,22 @@ select {
 
 /* Modal dialog to require the user to read something or input something before continuing */
 /* Initially hidden with display: none; property */
-.modal 
+
+#loginForm
+{
+    display: none;  
+}
+
+/*initially hidden login form */
+#signupForm
 {
     display: none;  
 }
 
 /* a backdrop to obsecure content behind the modal */
 /* apply z-index to the positioned ancestor to bring the entire stacking context forward */
-.modal-backdrop 
-{
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-}
-.modal-body 
+
+#userLoginForm-body, #registerForm-body
 {
     position: fixed;
     top: 3em;
@@ -355,8 +362,8 @@ select {
     right: 20%;
     left: 20%;
     padding: 2em 3em;
-    background-color: white;
     overflow: auto;
+    z-index: 3;
 }
 
 /* close button styles */

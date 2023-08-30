@@ -62,8 +62,6 @@ def rank_teams():
         db.execute("SELECT COUNT(*) AS total_matches FROM matches WHERE home_team_id = ? OR away_team_id = ?", (team[0], team[0]))
         matches_played = db.fetchone()
         ranking.append(matches_played)
-    
-
     return ranking
 
 def show_results():
@@ -122,6 +120,12 @@ def featuredPlayer():
     else:
         return "Metasaka"
 
+#session data as the user navigates around the page
+def userSession():
+ # Query database for username
+    check_persist = session.get("user_username")
+    return check_persist
+
 # Render the landing page
 @app.route("/")
 def landingpage():
@@ -143,7 +147,8 @@ def index():
     ranks = rank_teams()
     results = show_results()
     player = featuredPlayer()
-    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results, player = player)
+    check_persist = userSession()
+    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results, player = player, rows = check_persist)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -185,8 +190,10 @@ def login():
                 ranks = rank_teams()
                 results = show_results()
                 player = featuredPlayer()
+
+                # hide or show features based on 
                 check_persist = session.get("user_username")
-                return render_template("index.html", recent_matches=recent_matches, fixes = fixes, ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player) 
+                return render_template("index.html", recent_matches=recent_matches, fixes = fixes, data = rows[6], ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player) 
             else:
                 message = "User doesn't exist"
                 dynamic_class = "visible"
@@ -206,7 +213,7 @@ def index2():
 
 @app.route("/logout")
 def logout():
-    session["name"] = None
+    session["user_username"] = None
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -223,6 +230,7 @@ def register():
         middle_name = request.form.get("middlename")
         last_name = request.form.get("lastname")
         username = request.form.get("username")
+        user_type = request.form.get("options")
         hash = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
@@ -232,10 +240,19 @@ def register():
         elif not hash or hash != confirmation:
             return ("provided password did not match")
         else:
-            db.execute("INSERT INTO 'users' (first_name, middle_name, last_name, username, hash) VALUES(?,?,?,?,?)", 
-                       [first_name, middle_name, last_name, username, hash])
+            db.execute("INSERT INTO 'users' (first_name, middle_name, last_name, username, hash, type) VALUES(?,?,?,?,?,?)", 
+                       [first_name, middle_name, last_name, username, hash, user_type])
             con.commit()
-            return render_template("register.html", registeredUsers = registeredUsers)
+            
+            # start a session for the new user
+            # Query database for username
+            res= db.execute("SELECT * FROM users WHERE username = ?", [username])
+            rows = res.fetchone()
+            # set session ID and username 
+            session["user_id"] = rows[0]
+            session["user_username"] = username
+            check_persist = session.get("user_username")
+            return render_template("landingpage.html", rows = check_persist)
     return render_template("register.html")
 
 @app.route("/teams")
@@ -243,7 +260,8 @@ def teams():
     # fetch data from the teams table
     db.execute("SELECT * FROM teams")
     teams = db.fetchall()
-    return render_template("teams.html", teams=teams)
+    check_persist = userSession()
+    return render_template("teams.html", teams=teams, rows =  check_persist)
 
 # add a recently played match
 @app.route("/addMatch", methods=["GET", "POST"])
@@ -325,7 +343,7 @@ def portfolio():
         if (check_persist + str(1)) == file:
             profile_photo.append(file)
 
-    return render_template("portfolio.html", check_persist=check_persist, files = myfiles, profile_photo = profile_photo)
+    return render_template("portfolio.html", check_persist=check_persist, files = myfiles, profile_photo = profile_photo, rows = check_persist)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port = 8080)

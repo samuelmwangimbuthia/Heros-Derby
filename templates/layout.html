@@ -12,19 +12,81 @@
 <body>
     <div class="container">   
         <nav>
-            <div class="modal" id="modal">
-                <div class="modal-backdrop">
-                    <div class="modal-body">
-                        <button class="modal-close" id="close" onclick="closeDialog()">close</button>
-                        <h2>HerosDerby Newsletter</h2>
-                        <p>Sign up for our monthly newsletter. No spam.We promise!</p>
-                        <form>
-                            <p>
-                                <label for="email">Email address</label>
-                                <input type="text" name="email">
-                            </p>
-                            <p><button type="submit">Submit</button></p>
+            <div id="loginForm" >  
+                <div id="userLoginForm-body">
+
+                    <div class="login-box">
+                            <h2>Login</h2>
+                            <p class="dynamic_class" style="color: red;">{{message}}</p>   
+                            <form action="/login" method="post">
+                                <div class="user-box">
+                                    <label>Username</label>
+                                    <input autocomplete="off" autofocus  id="username" name="username" type="text">
+                                    
+                                </div>
+                                <div class="user-box">
+                                    <label>Password</label>
+                                    <input id="password" name="password" type="password">
+                                    
+                                </div>
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </form>
+                            <div>
+                                <a href="/reset" class="reset-button">Forgot Password?</a>
+                            </div>
+                        
+                            <div>
+                                Not yet a member?
+                                <button class="register-button"><a href="/register">Register</a></button>
+                            </div>
+                            <p id="warn">{{warn}}</p>
+                            <button id="close_login">close</button>
+                
+                    </div>
+                </div>         
+            </div>  
+            <div id="signupForm">
+                <div id="registerForm-body">
+                    <div class="login-box">
+                        <h2>Sign Up</h2>
+                        <form action="/register" method="post">
+                            <div class="user-box">
+                                <input autocomplete="off" autofocus  id="firstname" name="firstname" type="text">
+                                <label>First Name</label>
+                            </div>
+                            <div class="user-box">
+                                <input autocomplete="off" autofocus  id="middlename" name="middlename" type="text">
+                                <label>Middle Name</label>
+                            </div>
+                            <div class="user-box">
+                                <input autocomplete="off" autofocus  id="lastname" name="lastname" type="text">
+                                <label>Last Name</label>
+                            </div>       
+                            <div>
+                                <input  name="options" id="normalUser" type="radio" value="normalUser">
+                                <label>Normal User</label>
+                                <input   name="options" id="coach" type="radio" value="coach">
+                                <label>Coach</label>
+                                <input   name="options" id="player" type="radio" value="player">
+                                <label>Player</label>
+                                <input  name="options" id="sponsor" type="radio" value="sponsor">
+                                <label>Sponsor</label>
+                            </div>       
+                            <div class="user-box">
+                                <input autocomplete="off" autofocus  id="username1" name="username" type="text">
+                                <label>Username</label>
+                            </div>
+                            <div class="user-box">
+                                <input id="password1" name="password" type="password">
+                                <label>Password</label>
+                            </div>
+                            <div class="user-box">
+                                <input id="confirmation" name="confirmation" type="password">
+                                <label>Confirm Password</label>
+                            </div>
+                            <button type="submit">Register</button>
                         </form>
+                        <button id="close_signup" style="display: block;" onclick="close()">close</button>
                     </div>
                 </div>
             </div>
@@ -32,9 +94,10 @@
                 <li class="logo"><a href="/">Heros Derby</a></li>
                 <li><a href="/index">Home</a></li>
                 <li><a href="/teams">Teams</a></li>
-                <li><a id="open">Newsletter</a></li>
+
                 {% if rows %}
-                    <li><a href="/portfolio">Loggedin as {{rows}}</a></li>
+                    <!--<li><a href="/portfolio">Loggedin as {{rows}}</a></li>-->
+                    <li class="nav-img"><a href="/portfolio"><img width="30" height="30" src="/static/{{rows}}" alt=""></a></li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
                    <!--<li class="nav-right"><a href="/login">Login</a></li>-->
@@ -43,7 +106,7 @@
                            <div class="dropdown-label">Login</div>
                            <div class="dropdown-menu">
                                <ul class="submenu">
-                                   <li><a href="/login">User</a></li>
+                                   <li><a id="loginButton">User</a></li>
                                    <li><a href="/login">Player</a></li>
                                    <li><a href="/login">Coach</a></li>
                                    <li><a href="/login">Sponsor</a></li>
@@ -51,8 +114,8 @@
                            </div>                  
                        </div>   
                    </li>
+                   <li class="register dynamic_class"><a  id="registerButton" >Register</a></li>
                 {% endif %}            
-                <li class="register dynamic_class"><a href="/register">Register</a></li>
                 
             </ul>
         </nav>
