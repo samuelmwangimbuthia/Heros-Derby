@@ -104,6 +104,12 @@ nav, .landing, .featured-games, .overview, footer
 
 }
 
+/* to make the profile photo icon round */
+.site-nav > li > .profile
+{
+    padding: 0;
+}
+
 .site-nav > li + li 
 {
     margin-left: 1.5em;
