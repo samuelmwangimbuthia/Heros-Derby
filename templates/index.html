@@ -164,7 +164,7 @@
         </div>
             <div class="Featured-player">
                 <h4>Featured player</h4>
-                <div class="bio">
+               <div class="bio">
                     <img src="/static/{{player[1]}}.jpg" alt="">
                     <h6>Name: {{player[1]}}</h6>
                     <p><a href="">Club: {{player[2]}}</a></p>
@@ -172,6 +172,7 @@
                     <p>Age: {{player[3]}}</p>
                     <p>Nationality: {{player[4]}}</p>              
                 </div>
+               
             </div>
         <div class="sponsor">
             <h4>Sponsor A Team</h4>
@@ -188,9 +189,11 @@
             </form>           
         </div>
     </aside>  
+    {{usertype}}
 </div>
+
 {% endblock %} 
-{{rows}}
+
 {% block scripts %}
 <script src="js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -202,6 +205,6 @@
         $('#eventsSlide').carousel({interval: 2000})
     });
 </script>
-{{data}}
+
 
 {% endblock %}

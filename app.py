@@ -153,16 +153,17 @@ def index():
 def login():
     """Log user in"""
     player = featuredPlayer()
+    my_var = request.args.get('my_var', None)
     # Forget any user_id
-    #session.clear()
+    session.clear()
+    # dynamic class to hide the login option after a successiful login
     dynamic_class = "hidden"
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
         # Ensure username was submitted
         if not request.form.get("username"):
             warn = "must provide username"
-            return render_template("login.html", warn = warn)
+            return render_template("index.html", player = player, warn = warn)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
@@ -171,6 +172,8 @@ def login():
         # Query database for username
         res= db.execute("SELECT * FROM users WHERE username = ?", [request.form.get("username")])
         rows = res.fetchone()
+        res1= db.execute("SELECT type FROM types JOIN users ON users.id = types.id_users WHERE username = ?", [request.form.get("username")])
+        usertype = res1.fetchall()
 
         # Ensure username exists and password is correct
         #if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -184,6 +187,13 @@ def login():
                 session["user_id"] = rows[0]
                 # set session username
                 session["user_username"] = rows[1]
+                # set session user type
+                if len(usertype) == 2:
+                    session["user_type1"] = usertype[0][0]
+                    session["user_type2"] = usertype[1][0]
+                else:
+                    session["user_type1"] = usertype[0][0]
+                
                 # Redirect user to home page
                 recent_matches = display_recent_matches()
                 fixes = fixtures()
@@ -191,16 +201,18 @@ def login():
                 results = show_results()
                 player = featuredPlayer()
 
-                # hide or show features based on 
+
+
+                # hide or show features based on user type
                 check_persist = session.get("user_username")
-                return render_template("index.html", recent_matches=recent_matches, fixes = fixes, data = rows[6], ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player) 
+                return render_template("index.html", recent_matches=recent_matches, fixes = fixes, data = rows[5], usertype = len(usertype), ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player, my_var = my_var) 
             else:
                 message = "User doesn't exist"
                 dynamic_class = "visible"
-                return render_template("login.html", message = message, dynamic_class = dynamic_class)   
+                return render_template("index.html", message = message, player = player, dynamic_class = dynamic_class)   
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("login.html", dynamic_class = dynamic_class)
+        return render_template("index.html", dynamic_class = dynamic_class, player = player)
 
 @app.route("/")
 def index2():
