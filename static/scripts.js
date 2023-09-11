@@ -1,25 +1,35 @@
-function showHideDiv(id) {
-    var e = document.getElementById(id);
-    if(e.style.display == null || e.style.display == "none") {
-        e.style.display = "table-row";
-    } else {
-        e.style.display = "none";
-    }
-}
+//open user login form
+var close_login = document.getElementById('close_login');
+var close_signup = document.getElementById('close_signup');
+var loginForm = document.getElementById('loginForm');
+var signupForm = document.getElementById('signupForm');
+var registerButton = document.getElementById('registerButton');
+var loginButton = document.getElementById('loginButton')
 
-//modal dialog
-var button = document.getElementById('open');
-var close = document.getElementById('close');
-var modal = document.getElementById('modal');
-button.addEventListener('click', function (event) {
+
+loginButton.addEventListener('click', function (event) {
     event.preventDefault();
-    modal.style.display = 'block';
+    loginForm.style.display = 'block';
+});
+
+registerButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    signupForm.style.display = 'block';
+});
+
+close_login.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'none';
+});
+
+//close login form
+close_signup.addEventListener('click', function (event) {
+    event.preventDefault();
+    signupForm.style.display = 'none';
 });
 
 
-function closeDialog(){
-    close.addEventListener('click', function (event) {
-        event.preventDefault();
-        modal.style.display = 'none';
-    });
-}
+
+
+
+
