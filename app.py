@@ -1,9 +1,11 @@
 import os
 import sqlite3
 import datetime
+import base64
 from flask import Flask, render_template, redirect, request, session
 from flask_session import Session 
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 from flask_bootstrap import Bootstrap
 
 
@@ -48,6 +50,20 @@ def display_recent_matches():
 
     return recent_matches
 
+def display_teams():
+     # fetch data from the teams table
+    db.execute("SELECT * FROM teams")
+    teams = db.fetchall()
+    teams_with_data_uris = []
+    for team in teams:
+        team_id, team_name, logo_data, team_county, team_constituency, team_ward, team_stadium = team
+        if logo_data is not None:
+            logo_data_bytes = base64.b64decode(logo_data.encode('utf-8'))
+            data_uri = f"data:image/png;base64,{base64.b64encode(logo_data_bytes).decode()}"
+        else:
+            data_uri = "logo-dummy.png"
+        teams_with_data_uris.append({"id": team_id, "name": team_name, "logo": data_uri, "county": team_county, "constituency": team_constituency, "ward": team_ward, "stadium": team_stadium})
+    return teams_with_data_uris
 # To rank the teams in the standings table
 def rank_teams():
     #check the registered teams
@@ -153,16 +169,18 @@ def index():
 def login():
     """Log user in"""
     player = featuredPlayer()
+    my_var = request.args.get('my_var', None)
     # Forget any user_id
-    #session.clear()
+    session.clear()
+    # dynamic class to hide the login option after a successiful login
     dynamic_class = "hidden"
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
+        
         # Ensure username was submitted
         if not request.form.get("username"):
             warn = "must provide username"
-            return render_template("login.html", warn = warn)
+            return render_template("index.html", player = player, warn = warn)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
@@ -171,6 +189,8 @@ def login():
         # Query database for username
         res= db.execute("SELECT * FROM users WHERE username = ?", [request.form.get("username")])
         rows = res.fetchone()
+        res1= db.execute("SELECT type FROM types JOIN users ON users.id = types.id_users WHERE username = ?", [request.form.get("username")])
+        usertype = res1.fetchall()
 
         # Ensure username exists and password is correct
         #if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -184,23 +204,40 @@ def login():
                 session["user_id"] = rows[0]
                 # set session username
                 session["user_username"] = rows[1]
-                # Redirect user to home page
-                recent_matches = display_recent_matches()
-                fixes = fixtures()
-                ranks = rank_teams()
-                results = show_results()
-                player = featuredPlayer()
+                # set session user type
+                if len(usertype) == 2:
+                    session["user_type1"] = usertype[0][0]
+                    session["user_type2"] = usertype[1][0]
+                else:
+                    session["user_type1"] = usertype[0][0]
+                
+                # Style the page according to user type
+                user_type = my_var
+                if user_type == session["user_type1"] or user_type == session["user_type2"]:
+                    found = "visible"
+                    #return (user_type)
+                
+                    # Redirect user to home page
+                    recent_matches = display_recent_matches()
+                    fixes = fixtures()
+                    ranks = rank_teams()
+                    results = show_results()
+                    player = featuredPlayer()
 
-                # hide or show features based on 
-                check_persist = session.get("user_username")
-                return render_template("index.html", recent_matches=recent_matches, fixes = fixes, data = rows[6], ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player) 
+
+
+                    # hide or show features based on user type
+                    check_persist = session.get("user_username")
+                    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, data = rows[5], usertype = len(usertype), ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player, my_var = my_var) 
+                else:
+                    return render_template("login.html",user_type = my_var)
             else:
                 message = "User doesn't exist"
                 dynamic_class = "visible"
-                return render_template("login.html", message = message, dynamic_class = dynamic_class)   
+                return render_template("index.html", message = message, player = player, dynamic_class = dynamic_class)   
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("login.html", dynamic_class = dynamic_class)
+        return render_template("login.html", dynamic_class = dynamic_class, player = player, my_var = my_var)
 
 @app.route("/")
 def index2():
@@ -257,9 +294,7 @@ def register():
 
 @app.route("/teams")
 def teams():
-    # fetch data from the teams table
-    db.execute("SELECT * FROM teams")
-    teams = db.fetchall()
+    teams = display_teams()
     check_persist = userSession()
     return render_template("teams.html", teams=teams, rows =  check_persist)
 
@@ -290,7 +325,8 @@ def add_match():
     return render_template("addMatch.html")
 @app.route("/addTeam", methods=["GET", "POST"])
 def add_team():
-    # if not logged in , login first to add a match
+    # if not logged in , login first to add a team
+    myWarning = "team already exists"
     if request.method == "POST":
         # insert teams into the database
         # lookup the id for the teams and if not created insert it
@@ -299,14 +335,18 @@ def add_team():
         constituency = request.form.get("constituency")
         ward = request.form.get("ward")
         stadium = request.form.get("stadium")
-        db.execute("SELECT name FROM teams WHERE name = ?", (team_name))
+        logo = request.files["logo_image"]
+        # Read binary data from the image file
+        image_data = base64.b64encode(logo.read())
+        image_data = image_data.decode('ascii')
+        print(type(image_data))
+        db.execute("SELECT name FROM teams WHERE name = ?", [team_name])
         team = db.fetchone()
         if team:
-            myWarning = "team already exists"
             return myWarning
         else:
-            db.execute("INSERT INTO 'teams' (name, county, constituency, ward, stadium) VALUES(?,?,?,?,?)",
-                   [team_name, county, constituency, ward, stadium])
+            db.execute("INSERT INTO 'teams' (name, county, constituency, ward, stadium, logo) VALUES(?,?,?,?,?,?)",
+                   [team_name, county, constituency, ward, stadium, image_data])
             con.commit()
         # display the dialog
     return render_template("teams.html", myWarning = myWarning)

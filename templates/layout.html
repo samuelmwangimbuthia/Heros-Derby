@@ -106,10 +106,10 @@
                            <div class="dropdown-label">Login</div>
                            <div class="dropdown-menu">
                                <ul class="submenu">
-                                   <li><a id="loginButton">User</a></li>
-                                   <li><a href="/login">Player</a></li>
-                                   <li><a href="/login">Coach</a></li>
-                                   <li><a href="/login">Sponsor</a></li>
+                                   <li><a href="{{ url_for('login', my_var='normal') }}">User</a></li>
+                                   <li><a id="loginButton2" href="{{ url_for('login', my_var='player') }}">Player</a></li>
+                                   <li><a id="loginButton3" href="{{ url_for('login', my_var='coach') }}">Coach</a></li>
+                                   <li><a id="loginButton4" href="{{ url_for('login', my_var='sponsor') }}">Sponsor</a></li>
                                </ul>
                            </div>                  
                        </div>   

@@ -4,10 +4,27 @@ var close_signup = document.getElementById('close_signup');
 var loginForm = document.getElementById('loginForm');
 var signupForm = document.getElementById('signupForm');
 var registerButton = document.getElementById('registerButton');
-var loginButton = document.getElementById('loginButton')
+var loginButtonNormal = document.getElementById('loginButton1')
+var loginButtonPlayer = document.getElementById('loginButton2')
+var loginButtonCoach = document.getElementById('loginButton3')
+var loginButtonSponsor = document.getElementById('loginButton4')
 
 
-loginButton.addEventListener('click', function (event) {
+
+loginButtonNormal.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'block';
+});
+
+loginButtonPlayer.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'block';
+});
+loginButtonCoach.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'block';
+});
+loginButtonSponsor.addEventListener('click', function (event) {
     event.preventDefault();
     loginForm.style.display = 'block';
 });

@@ -14,9 +14,9 @@
         <li class="logo"><a href="/">Heros Derby</a></li>
         <li><a href="/index">Home</a></li>
         <li><a href="/teams">Teams</a></li>
-        <li><a id="open">Newsletter</a></li>
         {% if rows %}
-            <li><a href="/portfolio">Loggedin as {{rows}}</a></li>
+            <!--<li><a href="/portfolio">Loggedin as {{rows}}</a></li>-->
+            <li class="nav-img"> <a class="profile" href="/portfolio"><img width="30" height="30" src="/static/{{rows}}" alt=""></a></li>
             <li><a href="/logout">Logout</a></li>
         {% else %}
            <!--<li class="nav-right"><a href="/login">Login</a></li>-->
