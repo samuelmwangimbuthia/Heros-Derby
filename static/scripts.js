@@ -20,6 +20,14 @@ loginButtonPlayer.addEventListener('click', function (event) {
     event.preventDefault();
     loginForm.style.display = 'block';
 });
+loginButtonCoach.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'block';
+});
+loginButtonSponsor.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'block';
+});
 
 registerButton.addEventListener('click', function (event) {
     event.preventDefault();

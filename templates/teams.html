@@ -15,15 +15,17 @@
                 <th>County</th>
                 <th>Constituency</th>
                 <th>Ward</th>
+                <th>Stadium</th>
             </tr>
             {% for team in teams %}
             <tr>
                 <td>{{ team[0] }}</td>
                 <td>{{ team[1] }}</td>
-                <td>{{ team[2] }}</td>
+                <td><img src= "{{'data:image/png;base64,' + team[2]|urlencode}}" width="30px"></td>
                 <td>{{ team[3] }}</td>
                 <td>{{ team[4] }}</td>
                 <td>{{ team[5] }}</td>
+                <td>{{ team[6] }}</td>
             </tr>
             {% endfor %}
         </table>
@@ -32,7 +34,7 @@
 
 <div class="login-box">
     <h2>Add a local team</h2>
-    <form action="/addTeam" method="post">
+    <form action="/addTeam" method="post"  enctype="multipart/form-data">
         <div class="user-box">
             <input type="text" name="teamName" placeholder="Name">
             <label>Name</label>         
@@ -53,7 +55,9 @@
         <div class="user-box">
             <input type="text" name="stadium" placeholder="Stadium">
             <label>Stadium</label>
-
+        </div>
+        <div>
+            <input type="file" name="logo_image"> 
         </div>
         <button type="submit">Submit</button>
         {{myWarning}}
