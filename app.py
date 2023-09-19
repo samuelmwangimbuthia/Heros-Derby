@@ -51,18 +51,20 @@ def display_recent_matches():
     return recent_matches
 
 def display_teams():
-     # fetch data from the teams table
+    # fetch data from the teams table
     db.execute("SELECT * FROM teams")
     teams = db.fetchall()
+
+    # convert the images into uri that can be rendered
     teams_with_data_uris = []
     for team in teams:
-        team_id, team_name, logo_data, team_county, team_constituency, team_ward, team_stadium = team
+        team_id, team_name, logo_data,team_county, team_constituency, team_ward, team_stadium,  id_county = team
         if logo_data is not None:
             logo_data_bytes = base64.b64decode(logo_data.encode('utf-8'))
             data_uri = f"data:image/png;base64,{base64.b64encode(logo_data_bytes).decode()}"
-        else:
+        elif not logo_data:
             data_uri = "logo-dummy.png"
-        teams_with_data_uris.append({"id": team_id, "name": team_name, "logo": data_uri, "county": team_county, "constituency": team_constituency, "ward": team_ward, "stadium": team_stadium})
+        teams_with_data_uris.append({"id": team_id, "name": team_name, "logo": data_uri, "county": team_county, "id_county": id_county, "constituency": team_constituency, "ward": team_ward, "stadium": team_stadium})
     return teams_with_data_uris
 # To rank the teams in the standings table
 def rank_teams():
@@ -295,8 +297,10 @@ def register():
 @app.route("/teams")
 def teams():
     teams = display_teams()
+    db.execute("SELECT name FROM counties ORDER BY name")
+    counties = db.fetchall()
     check_persist = userSession()
-    return render_template("teams.html", teams=teams, rows =  check_persist)
+    return render_template("teams.html", teams=teams, rows =  check_persist, counties = counties)
 
 # add a recently played match
 @app.route("/addMatch", methods=["GET", "POST"])
@@ -327,11 +331,20 @@ def add_match():
 def add_team():
     # if not logged in , login first to add a team
     myWarning = "team already exists"
+    teams = display_teams()
+    db.execute("SELECT name FROM counties")
+    counties = db.fetchone()
     if request.method == "POST":
         # insert teams into the database
         # lookup the id for the teams and if not created insert it
         team_name = request.form.get("teamName") 
         county = request.form.get("county") 
+
+        # save the id of the county instead of the name
+        db.execute("SELECT id FROM counties WHERE name = ?", [county])
+        id_county = db.fetchone()
+        id_county = id_county[0]
+
         constituency = request.form.get("constituency")
         ward = request.form.get("ward")
         stadium = request.form.get("stadium")
@@ -339,18 +352,34 @@ def add_team():
         # Read binary data from the image file
         image_data = base64.b64encode(logo.read())
         image_data = image_data.decode('ascii')
-        print(type(image_data))
         db.execute("SELECT name FROM teams WHERE name = ?", [team_name])
         team = db.fetchone()
         if team:
             return myWarning
         else:
-            db.execute("INSERT INTO 'teams' (name, county, constituency, ward, stadium, logo) VALUES(?,?,?,?,?,?)",
-                   [team_name, county, constituency, ward, stadium, image_data])
+            db.execute("INSERT INTO 'teams' (name, county, constituency, ward, stadium, logo, id_county) VALUES(?,?,?,?,?,?,?)",
+                   [team_name, county, constituency, ward, stadium, image_data, id_county])
             con.commit()
         # display the dialog
-    return render_template("teams.html", myWarning = myWarning)
+    return render_template("teams.html", myWarning = myWarning, teams = teams, counties = counties)
 
+# filter teams
+@app.route("/filter", methods=["GET", "POST"])
+def filter():
+    db.execute("SELECT name FROM counties")
+    counties = db.fetchone()
+    teams = display_teams()
+    if request.method == "POST":
+        # get the specified county
+        # get the specified league
+        requestedPlayer = request.form.get("search")
+        if requestedPlayer:
+            playerInfo = db.execute("SELECT * FROM players WHERE name = ?", [requestedPlayer])
+            player = playerInfo.fetchone()
+        else:
+            return "No player name supplied"
+    return render_template("player.html", player = player)
+    return render_template("teams.html", teams = teams, counties = counties)
 # search for players and coaches biography
 @app.route("/search", methods=["GET","POST"])
 def search():

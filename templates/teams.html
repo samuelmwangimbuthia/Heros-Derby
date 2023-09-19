@@ -6,29 +6,63 @@
 
 {% block main %}
 <div class="table-container">
+    <table>
+        <tr>
+            <th>County</th>
+            <th>League</th>         
+        </tr>
+        <tr>
+            <td>
+                <select name="county" class="user-box">
+                    <option>Select County</option>
+                    {% for option in counties %}
+                    <option  value="{{ option[0] }}">{{ option[0] }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="county" class="user-box">
+                    <option>Select County</option>
+                    {% for option in counties %}
+                    <option  value="{{ option[0] }}">{{ option[0] }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button><a href="/filter">Filter</a></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="table-container">
     <h1>Teams</h1>
-        <table>
+        <table >
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Logo</th>
                 <th>County</th>
+                <th>County ID</th>
                 <th>Constituency</th>
                 <th>Ward</th>
                 <th>Stadium</th>
             </tr>
             {% for team in teams %}
             <tr>
-                <td>{{ team[0] }}</td>
-                <td>{{ team[1] }}</td>
-                <td><img src= "{{'data:image/png;base64,' + team[2]|urlencode}}" width="30px"></td>
-                <td>{{ team[3] }}</td>
-                <td>{{ team[4] }}</td>
-                <td>{{ team[5] }}</td>
-                <td>{{ team[6] }}</td>
+                <td>{{ team["id"] }}</td>
+                <td>{{ team["name"] }}</td>
+                <td><img src= "{{team['logo']}}" width="30px"></td>
+                <td>{{ team["county"] }}</td>
+                <td>{{ team["id_county"] }}</td>
+                <td>{{ team["constituency"] }}</td>
+                <td>{{ team["ward"] }}</td>
+                <td>{{ team["stadium"] }}</td>
             </tr>
             {% endfor %}
         </table>
+       
 </div>
 
 
@@ -39,8 +73,13 @@
             <input type="text" name="teamName" placeholder="Name">
             <label>Name</label>         
         </div>
-        <div class="user-box">
-            <input type="text" name="county" placeholder="County">
+        <div >
+            <select name="county" class="user-box">
+                <option>Select County</option>
+                {% for option in counties %}
+                <option  value="{{ option[0] }}">{{ option[0] }}</option>
+                {% endfor %}
+            </select>
             <label>County</label>         
         </div>
         <div class="user-box">
@@ -63,6 +102,5 @@
         {{myWarning}}
     </form>
 </div>
-
 
 {% endblock %}

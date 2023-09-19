@@ -226,7 +226,7 @@ nav, .landing, .featured-games, .overview, footer
 {
     position: relative;
     top: 1em;
-    left: 24em;
+    left: 1em;
     Width: 400px;
     padding: 1em;
     background: rgba(0, 0, 0, .8);
