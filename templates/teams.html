@@ -5,37 +5,26 @@
 {% endblock %}
 
 {% block main %}
-<div class="table-container">
-    <table>
-        <tr>
-            <th>County</th>
-            <th>League</th>         
-        </tr>
-        <tr>
-            <td>
-                <select name="county" class="user-box">
-                    <option>Select County</option>
-                    {% for option in counties %}
-                    <option  value="{{ option[0] }}">{{ option[0] }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-            <td>
-                <select name="county" class="user-box">
-                    <option>Select County</option>
-                    {% for option in counties %}
-                    <option  value="{{ option[0] }}">{{ option[0] }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button><a href="/filter">Filter</a></button>
-            </td>
-        </tr>
-    </table>
-</div>
+<form action="/filter" method="post">
+    <h6>Filter By:</h6>
+    <select name="county" class="user-box">
+        <option>County</option>
+        {% for option in counties %}
+        <option  value="{{ option[0] }}">{{ option[0] }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="league" class="user-box">
+        <option>League</option>
+        {% for option in leagues %}
+        <option  value="{{ option[0] }}">{{ option[0] }}</option>
+        {% endfor %}
+    </select>
+    <button class="{{applyFilter}}" type="submit">Apply Filter</button>
+    <button class="{{clearFilter}}"><a href="/clearFilter">Clear Filter</a></button>
+   
+</form>
+
 <div class="table-container">
     <h1>Teams</h1>
         <table >

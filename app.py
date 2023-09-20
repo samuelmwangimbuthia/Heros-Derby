@@ -5,7 +5,6 @@ import base64
 from flask import Flask, render_template, redirect, request, session
 from flask_session import Session 
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.utils import secure_filename
 from flask_bootstrap import Bootstrap
 
 
@@ -50,11 +49,18 @@ def display_recent_matches():
 
     return recent_matches
 
-def display_teams():
-    # fetch data from the teams table
-    db.execute("SELECT * FROM teams")
-    teams = db.fetchall()
-
+def display_teams(county,league):
+    # fetch data from the teams
+    teams = [] 
+    if not county  and not league:
+        db.execute("SELECT * FROM teams ORDER BY name ASC LIMIT 15")
+        teams = db.fetchall()
+    elif not county:
+        db.execute("SELECT * FROM teams JOIN leagues ON teams.id = leagues.id_teams WHERE league = ?", (league,))
+        teams = db.fetchall()
+    else:
+        db.execute("SELECT * FROM teams WHERE county = ? ORDER BY name ASC LIMIT 15", (county,))
+        teams = db.fetchall()
     # convert the images into uri that can be rendered
     teams_with_data_uris = []
     for team in teams:
@@ -296,11 +302,13 @@ def register():
 
 @app.route("/teams")
 def teams():
-    teams = display_teams()
+    teams = display_teams(0,0)
     db.execute("SELECT name FROM counties ORDER BY name")
     counties = db.fetchall()
+    db.execute("SELECT DISTINCT(league) FROM leagues ORDER BY league")
+    leagues = db.fetchall()
     check_persist = userSession()
-    return render_template("teams.html", teams=teams, rows =  check_persist, counties = counties)
+    return render_template("teams.html", teams=teams, rows =  check_persist, counties = counties, leagues = leagues )
 
 # add a recently played match
 @app.route("/addMatch", methods=["GET", "POST"])
@@ -368,18 +376,20 @@ def add_team():
 def filter():
     db.execute("SELECT name FROM counties")
     counties = db.fetchone()
-    teams = display_teams()
+    teams = display_teams(0,0)
+    
     if request.method == "POST":
-        # get the specified county
-        # get the specified league
-        requestedPlayer = request.form.get("search")
-        if requestedPlayer:
-            playerInfo = db.execute("SELECT * FROM players WHERE name = ?", [requestedPlayer])
-            player = playerInfo.fetchone()
+        # get the specified county and league
+        county = request.form.get('county')
+        league = request.form.get('league')
+        if county:
+            teams = display_teams(county,league)
+            print(county)
+            return render_template("teams.html", teams = teams, counties = counties, applyFilter = "hidden", clearFilter = "visible" )
         else:
-            return "No player name supplied"
-    return render_template("player.html", player = player)
+            return "No county name supplied"
     return render_template("teams.html", teams = teams, counties = counties)
+    
 # search for players and coaches biography
 @app.route("/search", methods=["GET","POST"])
 def search():
