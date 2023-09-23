@@ -9,8 +9,8 @@
     <h2>{{my_var}} Login </h2>
     <p>{{user_type}}</p>
     <p class="dynamic_class" style="color: red;">{{message}}</p>  
-    <input id="user_type" name="user_type" value="{{my_var}}" type="text"> 
     <form action="/login" method="post">
+        <input hidden id="user_type" name="user_type" value="{{my_var}}" type="text"> 
         <div class="user-box">
             <label>Username</label>
             <input autocomplete="off" autofocus  id="username" name="username" type="text">

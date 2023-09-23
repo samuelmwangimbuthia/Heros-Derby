@@ -5,91 +5,92 @@
 {% endblock %}
 
 {% block main %}
-<form action="/filter" method="post">
-    <h6>Filter By:</h6>
-    <select name="county" class="user-box">
-        <option>County</option>
-        {% for option in counties %}
-        <option  value="{{ option[0] }}">{{ option[0] }}</option>
-        {% endfor %}
-    </select>
 
-    <select name="league" class="user-box">
-        <option>League</option>
-        {% for option in leagues %}
-        <option  value="{{ option[0] }}">{{ option[0] }}</option>
-        {% endfor %}
-    </select>
-    <button class="{{applyFilter}}" type="submit">Apply Filter</button>
-    <button class="{{clearFilter}}"><a href="/clearFilter">Clear Filter</a></button>
-   
-</form>
+<div>
 
-<div class="table-container">
-    <h1>Teams</h1>
-        <table >
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Logo</th>
-                <th>County</th>
-                <th>County ID</th>
-                <th>Constituency</th>
-                <th>Ward</th>
-                <th>Stadium</th>
-            </tr>
-            {% for team in teams %}
-            <tr>
-                <td>{{ team["id"] }}</td>
-                <td>{{ team["name"] }}</td>
-                <td><img src= "{{team['logo']}}" width="30px"></td>
-                <td>{{ team["county"] }}</td>
-                <td>{{ team["id_county"] }}</td>
-                <td>{{ team["constituency"] }}</td>
-                <td>{{ team["ward"] }}</td>
-                <td>{{ team["stadium"] }}</td>
-            </tr>
+    <form action="/filter" method="post">
+        <h6>Filter By:</h6>
+        <select name="county" class="user-box">
+            <option>County</option>
+            {% for option in counties %}
+            <option  value="{{ option[0] }}">{{ option[0] }}</option>
             {% endfor %}
-        </table>
-       
-</div>
-
-
-<div class="login-box">
-    <h2>Add a local team</h2>
-    <form action="/addTeam" method="post"  enctype="multipart/form-data">
-        <div class="user-box">
-            <input type="text" name="teamName" placeholder="Name">
-            <label>Name</label>         
-        </div>
-        <div >
-            <select name="county" class="user-box">
-                <option>Select County</option>
-                {% for option in counties %}
-                <option  value="{{ option[0] }}">{{ option[0] }}</option>
-                {% endfor %}
-            </select>
-            <label>County</label>         
-        </div>
-        <div class="user-box">
-            <input type="text" name="constituency" placeholder="constituency">
-            <label>Constituency</label>
-        </div>
-        <div class="user-box">
-            <input type="text" name="ward" placeholder="Ward">
-            <label>Ward</label>
-        </div>
-        
-        <div class="user-box">
-            <input type="text" name="stadium" placeholder="Stadium">
-            <label>Stadium</label>
-        </div>
-        <div>
-            <input type="file" name="logo_image"> 
-        </div>
-        <button type="submit">Submit</button>
-        {{myWarning}}
+        </select>
+        <select name="league" class="user-box">
+            <option>League</option>
+            {% for option in leagues %}
+            <option  value="{{ option[0] }}">{{ option[0] }}</option>
+            {% endfor %}
+        </select>
+        <button class="{{applyFilter}}" type="submit">Apply Filter</button>
+        <button class="{{clearFilter}}"><a href="/clearFilter">Clear Filter</a></button> 
     </form>
+    <div class="table-container ">
+        <h1>Teams</h1>
+            <table >
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Logo</th>
+                    <th>County</th>
+                    <th>County ID</th>
+                    <th>Constituency</th>
+                    <th>Ward</th>
+                    <th>Stadium</th>
+                </tr>
+                {% for team in teams %}
+                <tr>
+                    <td>{{ team["id"] }}</td>
+                    <td>{{ team["name"] }}</td>
+                    <td><img src= "{{team['logo']}}" width="30px"></td>
+                    <td>{{ team["county"] }}</td>
+                    <td>{{ team["id_county"] }}</td>
+                    <td>{{ team["constituency"] }}</td>
+                    <td>{{ team["ward"] }}</td>
+                    <td>{{ team["stadium"] }}</td>
+                </tr>
+                {% endfor %}
+            </table>      
+    </div>
+    
+    
+    <div class="login-box addTeam">
+        <h2>Add a local team</h2>
+        <form action="/addTeam" method="post"  enctype="multipart/form-data">
+            <div class="user-box">
+                <input type="text" name="teamName" placeholder="Name">
+                <label>Name</label>         
+            </div>
+            <div >
+                <select name="county" class="user-box">
+                    <option>Select County</option>
+                    {% for option in counties %}
+                    <option  value="{{ option[0] }}">{{ option[0] }}</option>
+                    {% endfor %}
+                </select>
+                <label>County</label>         
+            </div>
+            <div class="user-box">
+                <input type="text" name="constituency" placeholder="constituency">
+                <label>Constituency</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="ward" placeholder="Ward">
+                <label>Ward</label>
+            </div>
+            
+            <div class="user-box">
+                <input type="text" name="stadium" placeholder="Stadium">
+                <label>Stadium</label>
+            </div>
+            <div>
+                <input type="file" name="logo_image"> 
+            </div>
+            <button type="submit">Submit</button>
+            {{myWarning}}
+        </form>
+    </div>
 </div>
+
 
 {% endblock %}

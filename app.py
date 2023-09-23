@@ -65,11 +65,12 @@ def display_teams(county,league):
     teams_with_data_uris = []
     for team in teams:
         team_id, team_name, logo_data,team_county, team_constituency, team_ward, team_stadium,  id_county = team
-        if logo_data is not None:
+
+        if logo_data is None or logo_data.strip() == "":
+            data_uri = "/static/logo/logo-dummy.png"
+        else:
             logo_data_bytes = base64.b64decode(logo_data.encode('utf-8'))
             data_uri = f"data:image/png;base64,{base64.b64encode(logo_data_bytes).decode()}"
-        elif not logo_data:
-            data_uri = "logo-dummy.png"
         teams_with_data_uris.append({"id": team_id, "name": team_name, "logo": data_uri, "county": team_county, "id_county": id_county, "constituency": team_constituency, "ward": team_ward, "stadium": team_stadium})
     return teams_with_data_uris
 # To rank the teams in the standings table
@@ -178,13 +179,18 @@ def login():
     """Log user in"""
     player = featuredPlayer()
     my_var = request.args.get('my_var', None)
+    
+    # Store my_var in the session
+    session['my_var'] = my_var
+    print(my_var)
     # Forget any user_id
-    session.clear()
+    #session.clear()
     # dynamic class to hide the login option after a successiful login
     dynamic_class = "hidden"
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        
+        user_type = request.form.get('user_type', None)
+        print(user_type)
         # Ensure username was submitted
         if not request.form.get("username"):
             warn = "must provide username"
@@ -220,11 +226,12 @@ def login():
                     session["user_type1"] = usertype[0][0]
                 
                 # Style the page according to user type
-                user_type = my_var
-                if user_type == session["user_type1"] or user_type == session["user_type2"]:
-                    found = "visible"
-                    #return (user_type)
                 
+                print(session.get("user_username"))
+               # print(session["user_type2"])
+                # Check if the keys exist in the session dictionary before accessing them
+                
+                if user_type == session.get("user_type1") or user_type == session.get("user_type2"):
                     # Redirect user to home page
                     recent_matches = display_recent_matches()
                     fixes = fixtures()
@@ -232,13 +239,20 @@ def login():
                     results = show_results()
                     player = featuredPlayer()
 
-
-
                     # hide or show features based on user type
                     check_persist = session.get("user_username")
-                    return render_template("index.html", recent_matches=recent_matches, fixes = fixes, data = rows[5], usertype = len(usertype), ranks = ranks, results = results, rows = check_persist, dynamic_class = dynamic_class, player = player, my_var = my_var) 
-                else:
-                    return render_template("login.html",user_type = my_var)
+                    if user_type == 'sponsor':
+                        user_id = 'sponsor'
+                    elif user_type == 'normal':
+                        user_id = 'normal' 
+                    elif user_type == 'coach':
+                        user_id = 'coach'                  
+                    else:
+                        user_id = 'player'
+                    return render_template("index.html", recent_matches=recent_matches,user_id = user_id,
+                                            fixes = fixes, data = rows[5], usertype = len(usertype), ranks = ranks, results = results,
+                                              rows = check_persist, dynamic_class = dynamic_class, player = player, my_var = my_var) 
+                return render_template("login.html",user_type = my_var)
             else:
                 message = "User doesn't exist"
                 dynamic_class = "visible"

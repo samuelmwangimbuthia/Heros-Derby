@@ -32,6 +32,7 @@ body * + *
     max-width: 1080px;
     background-color: #ffff;    
     margin: 0 auto;
+    padding: 1.5em;
 }
 
 /* add background color and padding to the tiles*/
@@ -437,6 +438,28 @@ select {
     display: block;
 }
 .clearFilter
+{
+    display: none;
+}
+
+.addTeam
+{
+    display: none;
+}
+
+.sponsor
+{
+    display: none;
+}
+.coach
+{
+    display: inline;
+}
+.player
+{
+    display: inline;
+}
+.normal
 {
     display: none;
 }
