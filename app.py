@@ -29,7 +29,7 @@ with sqlite3.connect("derby.db", check_same_thread=False) as con:
 def display_recent_matches():
     # Calculate the date three days ago
     today = datetime.date.today()
-    three_days_ago = today - datetime.timedelta(days=20)
+    three_days_ago = today - datetime.timedelta(days=100)
     # Execute a SELECT query to fetch recent matches
     #db.execute("SELECT * FROM matches WHERE match_date >= ?", (three_days_ago,))
     db.execute("""
