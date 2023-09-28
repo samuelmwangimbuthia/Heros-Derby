@@ -53,7 +53,7 @@ def display_teams(county,league):
     # fetch data from the teams
     teams = [] 
     if not county  and not league:
-        db.execute("SELECT * FROM teams ORDER BY name ASC LIMIT 15")
+        db.execute("SELECT * FROM teams ORDER BY id ASC LIMIT 40")
         teams = db.fetchall()
     elif not county:
         db.execute("SELECT * FROM teams JOIN leagues ON teams.id = leagues.id_teams WHERE league = ?", (league,))
@@ -109,7 +109,7 @@ def show_results():
         GROUP BY
             teams.name
         ORDER BY
-            total_points DESC;
+            total_points DESC LIMIT 10;
 
 
     """)

@@ -45,8 +45,44 @@ close_signup.addEventListener('click', function (event) {
     signupForm.style.display = 'none';
 });
 
+// Show more or less button
+// Select all rows except the first one
+let showTeams = document.getElementById("showMore")
+let hideTeams = document.getElementById("showLess")
+showTeams.addEventListener("click", function(event){
+    event.preventDefault();
+    showTeams.style.display = 'none';
+    hideTeams.style.display = 'block';
+})
+hideTeams.addEventListener("click", function(event){
+    event.preventDefault();
+    hideTeams.style.display = 'none';
+    showTeams.style.display = 'block';
+})
+/*querySelectorAll("tr:nth-child(n+9)").forEach(function (e) {
+
+    // Add onClick event listener
+    // to selected rows
+    e.addEventListener("click", function () {
+
+        // Get all rows except the first one
+        var rows =
+            [...document.querySelectorAll(
+                "tr:not(:first-child)"
+            )];
+
+        var notSelectedRows =
+            rows.filter(function (element) {
+                
+            // Hide the rows that have
+            // not been clicked
+            if (element !== e) {
+                element.style.display = "none";
+            }
+        });
+    });
+});
 
 
-
-
+*/
 

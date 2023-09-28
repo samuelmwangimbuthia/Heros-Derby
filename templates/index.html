@@ -36,7 +36,7 @@
         <button class="{{user_id}}"><a href="/addMatch">Add Match</a></button>
 
         <div id="transferNewsSlide" class="carousel slide" data-ride="carousel">
-        <!--Slideshow-->
+            <!--Slideshow-->
             <h3>Transfer News</h3>
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -61,15 +61,16 @@
                     </div>
                 </div>
             </div>
-        <!--Controls-->
-        <a class="carousel-control-prev" href="#transferNewsSlide" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#transferNewsSlide" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+            <!--Controls-->
+            <a class="carousel-control-prev" href="#transferNewsSlide" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#transferNewsSlide" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
         <div id="eventsSlide" class="carousel slide" data-ride="carousel">
             <h3>Events</h3>
             <!--Slideshow-->
@@ -96,21 +97,22 @@
                     </div>
                 </div>
             </div>
-        <!--Controls-->
-        <a class="carousel-control-prev" href="#eventsSlide" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#eventsSlide" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-       
+            <!--Controls-->
+            <a class="carousel-control-prev" href="#eventsSlide" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#eventsSlide" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
     </aside>
     <main class="column-main tile">
         <div>
             <table>
                 <thead>Results</thead>
+                <tbody>
                     <tr>
                         <th>Team Name</th>
                         <th>Points</th>
@@ -118,8 +120,6 @@
                         <th>Total Draws</th>
                         <th>Total Losses</th>
                     </tr>
-
-                <tbody>
                     {% for result in results %}
                     <tr>
                         <td>{{ result[0] }}</td>
@@ -131,6 +131,8 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <button style="display: block;" id="showMore">Show More</button>
+            <button style="display: none;" id="showLess">Show Less</button>
             <table>
                 <thead>Fixtures</thead>
                 <tr>
@@ -178,7 +180,7 @@
             <h4>Sponsor A Team</h4>
             <form action="/sponsor" method="post">
                 <label for="sponsor">Sponsorship</label>
-                <select name="sponsorship" id="sponsor">
+                <select name="sponsorship">
                     <option disabled selected> Select Sponsorship</option>
                     <option value="Finances">Finances</option>
                     <option value="uniform">Uniform</option>
