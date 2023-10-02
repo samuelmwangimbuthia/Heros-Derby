@@ -16,7 +16,11 @@
         <li><a href="/teams">Teams</a></li>
         {% if rows %}
             <!--<li><a href="/portfolio">Loggedin as {{rows}}</a></li>-->
-            <li class="nav-img"> <a class="profile" href="/portfolio"><img width="30" height="30" src="/static/{{rows}}" alt=""></a></li>
+            <li class="nav-img">
+              <a class="profile" href="/portfolio">
+                <img width="30" height="30" src="/static/{{rows}}" alt="{{rows}} picture">
+              </a>
+            </li>
             <li><a href="/logout">Logout</a></li>
         {% else %}
            <!--<li class="nav-right"><a href="/login">Login</a></li>-->
@@ -80,6 +84,9 @@
       </div>
     </div>
   </main>
+  <footer>
+    <p>&copy; 2023 Promoting Local Talent. All rights reserved.</p>
+</footer>
 </body>
 </html>
   

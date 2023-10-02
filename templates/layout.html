@@ -14,10 +14,9 @@
         <nav>
             <div id="loginForm" >  
                 <div id="userLoginForm-body">
-
                     <div class="login-box">
                             <h2>Login</h2>
-                            <p class="dynamic_class" style="color: red;">{{message}}</p>   
+  
                             <form action="/login" method="post">
                                 <div class="user-box">
                                     <label>Username</label>
@@ -92,7 +91,7 @@
             </div>
             <ul class="site-nav">
                 <li class="logo"><a href="/">Heros Derby</a></li>
-                <li><a href="/index">Home</a></li>
+                <li><a href="/index">Analysis</a></li>
                 <li><a href="/teams">Teams</a></li>
 
                 {% if rows %}
@@ -121,11 +120,10 @@
         </nav>
 
         {% block main %}{% endblock %}
-        <footer>
-            <p>&copy; 2023 A Peace Building Initiative. All rights reserved.</p>
-        </footer>
+
     </div>
-    
+        {% block player %} {% endblock %}
+        {% block teams %} {% endblock %}
     <script src="/static/scripts.js" type="text/javascript"></script>
 </body>
 {% block scripts %} 

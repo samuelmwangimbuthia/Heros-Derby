@@ -23,17 +23,17 @@
             </tr>
             {% for match in recent_matches %}
             <tr>
-                <td>{{ match[0] }}</td>
-                <td>{{ match[1] }}</td>
-                <td>{{ match[2] }}</td>
-                <td>{{ match[3] }}</td>
-                <td>{{ match[4] }}</td>
-                <td>{{ match[5] }}</td>
+                <td>{{ match["id"] }}</td>
+                <td>{{ match["home_team"] }}</td>
+                <td>{{ match["away_team"] }}</td>
+                <td>{{ match["home_score"] }}</td>
+                <td>{{ match["away_score"] }}</td>
+                <td>{{ match["match_date"] }}</td>
             </tr>
             {% endfor %}
         </table>
         <!--only  visible to registered users-->
-        <button class="{{user_id}}"><a href="/addMatch">Add Match</a></button>
+        <button class="{{features}}"><a href="/addMatch" {{features}}>Add Match</a></button>
 
         <div id="transferNewsSlide" class="carousel slide" data-ride="carousel">
             <!--Slideshow-->
@@ -47,14 +47,14 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="/static/download2.jpg" class="d-block w-100" alt="...">
+                    <img src="/static/download2.jpg" class="d-block w-80" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Mbappe's Major Move</h5>
                         <p>This season will see a number of transfer...<a href="#">read more</a></p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="/static/download3.jpg" class="d-block w-100" alt="...">
+                    <img src="/static/download3.jpg" class="d-block w-80" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Mbappe's Major Move</h5>
                         <p>This season will see a number of transfer...<a href="#">read more</a></p>
@@ -144,11 +144,11 @@
                 </tr>
                 {% for fix in fixes %}
                 <tr>
-                    <td>{{ fix[0] }}</td>
-                    <td>{{ fix[1] }}</td>
-                    <td>{{ fix[2] }}</td>
-                    <td>{{ fix[3] }}</td>
-                    <td>{{ fix[4] }}</td>
+                    <td>{{ fix["home_team"] }}</td>
+                    <td>{{ fix["away_team"] }}</td>
+                    <td>{{ fix["match_date"] }}</td>
+                    <td>{{ fix["match_time"] }}</td>
+                    <td>{{ fix["venue"] }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -167,16 +167,16 @@
             <div class="Featured-player">
                 <h4>Featured player</h4>
                <div class="bio">
-                    <img src="/static/{{player[1]}}.jpg" alt="">
-                    <h6>Name: {{player[1]}}</h6>
+                    <img src="/static/{{player[0]}}.jpeg" width="100px" alt="">
+                    <h6>Name: {{player[0]}}</h6>
                     <p><a href="">Club: {{player[2]}}</a></p>
-                    <p>Position: {{player[5]}}</p>
-                    <p>Age: {{player[3]}}</p>
-                    <p>Nationality: {{player[4]}}</p>              
+                    <p>Position: {{player[4]}}</p>
+                    <p>Age: {{player[1]}}</p>
+                    <p>Nationality: {{player[2]}}</p>              
                 </div>
                
             </div>
-        <div class="sponsor">
+        <div class="teamSponsor">
             <h4>Sponsor A Team</h4>
             <form action="/sponsor" method="post">
                 <label for="sponsor">Sponsorship</label>
@@ -191,10 +191,10 @@
             </form>           
         </div>
     </aside>  
-    {{usertype}}
-    {{my_var}}
 </div>
-
+<footer>
+    <p>&copy; 2023 Promoting Local Talent. All rights reserved.</p>
+</footer>
 {% endblock %} 
 
 {% block scripts %}
@@ -208,6 +208,7 @@
         $('#eventsSlide').carousel({interval: 2000})
     });
 </script>
+
 
 
 {% endblock %}

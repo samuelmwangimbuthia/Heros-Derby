@@ -1,4 +1,4 @@
-//open user login form
+
 var close_login = document.getElementById('close_login');
 var close_signup = document.getElementById('close_signup');
 var loginForm = document.getElementById('loginForm');

@@ -4,19 +4,23 @@
     Teams
 {% endblock %}
 
-{% block main %}
+{% block header %}
+    <link href="/static/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles-player.css">
+{% endblock %}
 
-<div>
+{% block teams %}
 
-    <form action="/filter" method="post">
+<div class="playerContainer">
+    <form class="filterContainer" action="/filter" method="post">
         <h6>Filter By:</h6>
-        <select name="county" class="user-box">
-            <option>County</option>
+        <select name="county" class="user-box filter">
+            <option>County</option> 
             {% for option in counties %}
             <option  value="{{ option[0] }}">{{ option[0] }}</option>
             {% endfor %}
         </select>
-        <select name="league" class="user-box">
+        <select name="league" class="user-box filter">
             <option>League</option>
             {% for option in leagues %}
             <option  value="{{ option[0] }}">{{ option[0] }}</option>
@@ -52,9 +56,9 @@
                 {% endfor %}
             </table>      
     </div>
-    
-    
-    <div class="login-box addTeam">
+    {{features}}
+   
+    <div class="login-box {{features}}">
         <h2>Add a local team</h2>
         <form action="/addTeam" method="post"  enctype="multipart/form-data">
             <div class="user-box">
@@ -91,6 +95,8 @@
         </form>
     </div>
 </div>
-
-
+<footer>
+    <p>&copy; 2023 Promoting Local Talent. All rights reserved.</p>
+</footer>
+<script src="/static/scripts.js" type="text/javascript"></script>
 {% endblock %}

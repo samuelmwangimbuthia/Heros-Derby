@@ -1,0 +1,66 @@
+:root
+{
+    box-sizing: border-box;
+}
+*,
+::before,
+::after
+{
+    box-sizing: inherit;
+}
+body
+{
+    background-color: #dedcdc;
+    font-family: 'Times New Roman', helvetica, Arial, sans-serif;
+    font-size: medium;
+    margin: 1em;
+   
+}
+
+body * + *
+{
+    margin-top: 1.5em;
+}
+.playerContainer
+{
+    max-width: 1080px;
+    background-color: #f3fff0;    
+    margin: 0 auto;
+    padding: 1.5em;
+
+}
+
+.flex
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
+}
+
+.profilePhoto
+{
+    justify-self: end;
+}
+
+.userinfo
+{
+    display: block;
+    margin-top: 0.3em;
+
+}
+
+body .table-container
+{
+    padding: 1em;
+    background-color: #f3fff0;
+}
+
+h6, .filter
+{
+    margin: 0;
+}
+
+.filterContainer
+{
+    background-color: #f3fff0;
+}

@@ -442,9 +442,21 @@ select {
     display: none;
 }
 
-.addTeam
+.coachFeatures
+{
+    display: block;
+}
+.normalFeatures
 {
     display: none;
+}
+.playerFeatures
+{
+    display: none;
+}
+.sponsorFeatures
+{
+    display: block;
 }
 
 .sponsor
@@ -462,4 +474,24 @@ select {
 .normal
 {
     display: none;
+}
+
+.Featured-player
+{
+    margin-top: 0;
+}
+
+.Featured-player, .search-container
+{
+    margin: 0;
+}
+.teamSponsor
+{
+    background-color: #fff0f5;
+}
+
+.teamSponsor h4
+{
+    background-color: #faebd7;
+    margin-bottom: 0;
 }
