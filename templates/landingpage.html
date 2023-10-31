@@ -12,6 +12,7 @@
 
     <div class="landing">
         <div class="column1">
+            <p class="dynamic_class" style="color: red;">{{message}}</p> 
             <h1>Your Local Football
                 <br> Games Experience!</h1>
             <p>Checkout <a href="/index">Upcoming Matches and Results</a>  on Matches Played in your Neighborhood.</p>
@@ -30,24 +31,14 @@
         <h3>Featured Games</h3>
         {% for game in games %}
             <div class="game">
-                {% if game[1] %}
-                     <img src="/static/logo/{{game[1]}}_Logo.png" alt="">
-                {% else  %}
-                    <img src="/static/logo/logo-dummy.png" alt="No logo">
-
-                {% endif %}
-
-                {% if game[2] %}
-                    <img src="/static/logo/{{game[2]}}_Logo.png" alt="">
-                {% else  %}
-                    <img src="/static/logo/logo-dummy.png" alt="No logo">
-                {% endif %}
+                <img src="{{game['home_team_logo']}}" alt="">
+                <img src="{{game['away_team_logo']}}" alt="">
                 <p>
 
-                    <span>{{game[1]}} vs </span>
-                    <span >{{game[2]}}</span>
+                    <span>{{game['home_team']}} vs </span>
+                    <span >{{game['away_team']}}</span>
                 </p>
-                <p>Results {{game[3]}}:{{game[4]}}</p>
+                <p>Results {{game['home_score']}}:{{game['away_score']}}</p>
             </div>
         {% endfor %}
     </section>
@@ -55,24 +46,16 @@
         <h3>Upcoming Games</h3>
         {% for fix in fixtures %}
         <div class="game">
-            {% if fix[0] %}
-                <img src="/static/logo/{{fix[0]}}_Logo.png" alt="">
-            {% else  %}
-                <img src="/static/logo/logo-dummy.png" alt="No logo">
-
-            {% endif %}
-
-            {% if fix[1] %}
-                <img src="/static/logo/{{fix[1]}}_Logo.png" alt="">
-            {% else  %}
-                <img src="/static/logo/logo-dummy.png" alt="No logo">
-            {% endif %}
-            <p>{{fix[0]}} Vs: {{fix[1]}}</p>
-            <p>Time: {{fix[3]}} Venue: {{fix[4]}}</p>
+            <img src="{{ fix['home_team_logo']}}" alt="">
+            <img src="{{ fix['away_team_logo']}}" alt="">
+            <p>{{fix["home_team"]}} Vs: {{fix["away_team"]}}</p>
+            <p>Time: {{fix["match_time"]}} Venue: {{fix["venue"]}}</p>
         </div>
         {% endfor %}
 
     </section>
-
-
+    <footer>
+        <p>&copy; 2023 Promoting Local Talent. All rights reserved.</p>
+    </footer>
+    <script src="/static/scripts.js" type="text/javascript"></script>
 {% endblock %}

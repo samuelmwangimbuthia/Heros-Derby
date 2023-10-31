@@ -32,6 +32,7 @@ body * + *
     max-width: 1080px;
     background-color: #ffff;    
     margin: 0 auto;
+    padding: 1.5em;
 }
 
 /* add background color and padding to the tiles*/
@@ -226,7 +227,7 @@ nav, .landing, .featured-games, .overview, footer
 {
     position: relative;
     top: 1em;
-    left: 24em;
+    left: 1em;
     Width: 400px;
     padding: 1em;
     background: rgba(0, 0, 0, .8);
@@ -430,4 +431,67 @@ select {
 .carousel-inner .carousel-item img
 {
     height: min-content;
+}
+
+.applyFilter
+{
+    display: block;
+}
+.clearFilter
+{
+    display: none;
+}
+
+.coachFeatures
+{
+    display: block;
+}
+.normalFeatures
+{
+    display: none;
+}
+.playerFeatures
+{
+    display: none;
+}
+.sponsorFeatures
+{
+    display: block;
+}
+
+.sponsor
+{
+    display: none;
+}
+.coach
+{
+    display: inline;
+}
+.player
+{
+    display: inline;
+}
+.normal
+{
+    display: none;
+}
+
+.Featured-player
+{
+    margin-top: 0;
+}
+
+.Featured-player, .search-container
+{
+    margin: 0;
+}
+.teamSponsor
+{
+    background-color: #fff0f5;
+}
+
+.teamSponsor h4
+{
+    background-color: #faebd7;
+    margin-bottom: 0;
 }

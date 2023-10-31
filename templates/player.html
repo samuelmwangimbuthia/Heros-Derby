@@ -1,17 +1,41 @@
+
 {% extends "layout.html" %}
-{% block title %}
+{% block title %} 
     Player
 {% endblock %}
 
-{% block main %}
-    <div>
-        <img src="/static/{{player[1]}}.jpg" alt="">
-        <h4>Name: {{player[1]}}</h4>
-        <p><a href="">Club: {{player[2]}}</a></p>
-        <p>Position: {{player[5]}}</p>
-        <p>Age: {{player[3]}}</p>
-        <p>Nationality: {{player[4]}}</p>
-        <p>{{player[8]}}</p>
-        
-    </div>
+{% block header %}
+    <link href="/static/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles-player.css">
+{% endblock %}
+
+{% block player %}
+    <main class="playerContainer">
+        <div class="flex">
+            <div class="profilePhoto">
+                <img id="playerImage" src="/static/{{player[0]['name']}}.jpg" onerror="standby()" alt="" width="100px">
+                <h4>Name: {{player[0]["name"]}}</h4>
+            </div>
+            <div>
+                <span class="userinfo"><a href="/teams">Club: {{player[0]["team"]}}</a></span>
+                <span class="userinfo">Position: {{player[0]["position"]}}</span>
+                <span class="userinfo">Age: {{player[0]["age"]}}</span>
+                <span class="userinfo">Nationality: {{player[0]["nationality"]}}</span>
+                <span class="userinfo">County: {{player[0]["county"]}}</span>    
+            </div>
+        </div>
+        <div>
+            <h2>Biography</h2>
+            <p>{{bio}}</p>
+        </div>    
+        <footer>
+            <p>&copy; 2023 Promoting Local Talent. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        function standby() {
+            document.getElementById('playerImage').src = '/static/{{player[0]["name"]}}.jpeg'
+        }
+    </script>
 {% endblock %}
